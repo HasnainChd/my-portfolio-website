@@ -1,54 +1,105 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:portfolio_website/widgets/hero_section.dart';
-
 import '../utils/app_colors.dart';
+import '../widgets/hero_section.dart';
+import '../widgets/about_section.dart';
+import '../widgets/project_section.dart';
+import '../widgets/skill_section.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/contact_section.dart';
+import '../widgets/nav_bar.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _scrollController = ScrollController();
+  int _currentSection = 0;
+
+  final List<GlobalKey> _sectionKeys = List.generate(
+    5,
+    (index) => GlobalKey(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    // Update current section based on scroll position
+    for (int i = 0; i < _sectionKeys.length; i++) {
+      final RenderBox? box =
+          _sectionKeys[i].currentContext?.findRenderObject() as RenderBox?;
+      if (box != null) {
+        final position = box.localToGlobal(Offset.zero).dy;
+        if (position <= 100 && position >= -box.size.height + 100) {
+          if (_currentSection != i) {
+            setState(() => _currentSection = i);
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  void _scrollToSection(int index) {
+    final context = _sectionKeys[index].currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppColors.backgroundGradient,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeroSection(),
-              // About Section
-              Container(
-                height: 400,
-                color: Colors.green.withOpacity(0.1),
-                child: const Center(child: Text('ABOUT SECTION')),
+      body: Stack(
+        children: [
+          // Scrollable content
+          Container(
+            decoration: const BoxDecoration(
+              gradient: AppColors.backgroundGradient,
+            ),
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  const SizedBox(height: 70), // Space for navbar
+                  HeroSection(key: _sectionKeys[0]),
+                  AboutSection(key: _sectionKeys[1]),
+                  SkillsSection(key: _sectionKeys[2]),
+                  ProjectsSection(key: _sectionKeys[3]),
+                  ContactSection(key: _sectionKeys[4]),
+                ],
               ),
-
-              // Skills Section
-              Container(
-                height: 400,
-                color: Colors.blue.withOpacity(0.1),
-                child: const Center(child: Text('SKILLS SECTION')),
-              ),
-
-              // Projects Section
-              Container(
-                height: 500,
-                color: Colors.yellow.withOpacity(0.1),
-                child: const Center(child: Text('PROJECTS SECTION')),
-              ),
-
-              // Contact Section
-              Container(
-                height: 300,
-                color: Colors.purple.withOpacity(0.1),
-                child: const Center(child: Text('CONTACT SECTION')),
-              ),
-            ],
+            ),
           ),
-        ),
+
+          // Fixed navbar
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: NavBar(
+              currentIndex: _currentSection,
+              onNavItemTapped: _scrollToSection,
+            ),
+          ),
+        ],
       ),
     );
   }
