@@ -5,39 +5,51 @@ class AppData {
   static const List<Skill> skills = [
     Skill(name: 'Flutter'),
     Skill(name: 'Dart'),
-    Skill(name: 'Firebase'),
-    Skill(name: 'REST APIs'),
-    Skill(name: 'Git & GitHub'),
-    Skill(name: 'Provider'),
-    Skill(name: 'SQLite'),
-    Skill(name: 'Responsive Design'),
+    Skill(name: 'Firebase Authentication'),
+    Skill(name: 'Cloud Firestore'),
+    Skill(name: 'Firebase Storage'),
+    Skill(name: 'API Integration'),
+    Skill(name: 'State Management (Provider)'),
+    Skill(name: 'State Management (GetX)'),
+    Skill(name: 'MVC / Clean Architecture'),
+    Skill(name: 'Responsive UI Design'),
+    Skill(name: 'Custom Widgets'),
     Skill(name: 'Material Design'),
+    Skill(name: 'Git & GitHub'),
+    Skill(name: 'Debugging & Error Handling'),
     Skill(name: 'Android Studio'),
     Skill(name: 'VS Code'),
-    Skill(name: 'Figma'),
+    Skill(name: 'Postman'),
+    // Skill(name: 'Figma (UI Implementation)'),
   ];
 
   static const List<Project> projects = [
     Project(
+      title: 'Chat App',
+      description:
+          'A simple real-time chat application that allows users to register, view other users, and exchange messages using Firebase backend.',
+      technologies: ['Flutter', 'Firebase', 'Firestore', 'Firebase Storage'],
+      imageUrl: 'https://picsum.photos/800/600?random=1',
+      isAssetImage: true,
+      githubUrl:
+          'https://github.com/HasnainChd/chat-app-with-push-notfications',
+    ),
+    Project(
       title: 'E-Commerce App',
       description:
           'A full-featured e-commerce mobile application with product browsing, cart management, and payment integration.',
-      technologies: ['Flutter', 'Firebase', 'Provider', 'Stripe'],
-      githubUrl: 'https://github.com/yourusername/project1',
+      technologies: ['Flutter', 'Provider', 'REST API', 'Stripe'],
+      // imageUrl: 'assets/images/projects/project2.png',
+      isAssetImage: true,
+      githubUrl: 'https://github.com/HasnainChd/News-App',
     ),
     Project(
-      title: 'Weather App',
+      title: 'Calculator App',
       description:
-          'Real-time weather application with location-based forecasts, interactive maps, and weather alerts.',
-      technologies: ['Flutter', 'REST API', 'Geolocator', 'Dio'],
-      githubUrl: 'https://github.com/yourusername/project2',
-    ),
-    Project(
-      title: 'Task Manager',
-      description:
-          'Productivity app for managing tasks and projects with categories, priorities, and deadline reminders.',
-      technologies: ['Flutter', 'SQLite', 'Local Notifications'],
-      githubUrl: 'https://github.com/yourusername/project3',
+          'A simple calculator application for performing basic arithmetic operations with a clean and functional interface.',
+      technologies: ['Flutter', 'Dart'],
+      isAssetImage: true,
+      githubUrl: 'https://github.com/HasnainChd/Calculator',
     ),
   ];
 }

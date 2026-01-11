@@ -5,6 +5,7 @@ class Project {
   final String? imageUrl;
   final String? githubUrl;
   final String? liveUrl;
+  final bool isAssetImage;
 
   const Project({
     required this.title,
@@ -13,5 +14,6 @@ class Project {
     this.imageUrl,
     this.githubUrl,
     this.liveUrl,
+    this.isAssetImage = true,
   });
 }

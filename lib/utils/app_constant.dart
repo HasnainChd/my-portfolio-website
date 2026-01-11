@@ -21,4 +21,8 @@ class AppConstants {
   static const String email = "naindev309@gmail.com";
   static const String github = "github.com/hasnainChd";
   static const String linkedin = "linkedin.com/in/muhammad-hasnain";
+
+  // Social links
+  static const String githubUsername = "HasnainChd";
+  static const String linkedinProfile = "muhammad-hasnain309";
 }

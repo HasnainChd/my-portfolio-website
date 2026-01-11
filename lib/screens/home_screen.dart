@@ -37,13 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onScroll() {
-    // Update current section based on scroll position
-    for (int i = 0; i < _sectionKeys.length; i++) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    for (int i = _sectionKeys.length - 1; i >= 0; i--) {
       final RenderBox? box =
           _sectionKeys[i].currentContext?.findRenderObject() as RenderBox?;
       if (box != null) {
-        final position = box.localToGlobal(Offset.zero).dy;
-        if (position <= 100 && position >= -box.size.height + 100) {
+        final position = box
+            .localToGlobal(Offset.zero, ancestor: context.findRenderObject())
+            .dy;
+
+        if (position <= screenHeight / 2) {
           if (_currentSection != i) {
             setState(() => _currentSection = i);
           }
@@ -78,8 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               child: Column(
                 children: [
-                  const SizedBox(height: 70), // Space for navbar
-                  HeroSection(key: _sectionKeys[0]),
+                  const SizedBox(height: 70),
+                  HeroSection(
+                    key: _sectionKeys[0],
+                    onViewProjectsTap: () => _scrollToSection(3),
+                    onContactTap: () => _scrollToSection(4),
+                  ),
                   AboutSection(key: _sectionKeys[1]),
                   SkillsSection(key: _sectionKeys[2]),
                   ProjectsSection(key: _sectionKeys[3]),
