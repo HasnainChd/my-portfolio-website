@@ -20,7 +20,6 @@ class AppData {
     Skill(name: 'Android Studio'),
     Skill(name: 'VS Code'),
     Skill(name: 'Postman'),
-    // Skill(name: 'Figma (UI Implementation)'),
   ];
 
   static const List<Project> projects = [
@@ -29,27 +28,27 @@ class AppData {
       description:
           'A simple real-time chat application that allows users to register, view other users, and exchange messages using Firebase backend.',
       technologies: ['Flutter', 'Firebase', 'Firestore', 'Firebase Storage'],
-      imageUrl: 'https://picsum.photos/800/600?random=1',
+      imageUrl: null, // ✅ Change to null or use actual asset path
       isAssetImage: true,
-      githubUrl:
-          'https://github.com/HasnainChd/chat-app-with-push-notfications',
+      githubUrl: 'https://github.com/yourusername/chat-app',
     ),
     Project(
       title: 'E-Commerce App',
       description:
           'A full-featured e-commerce mobile application with product browsing, cart management, and payment integration.',
       technologies: ['Flutter', 'Provider', 'REST API', 'Stripe'],
-      // imageUrl: 'assets/images/projects/project2.png',
+      imageUrl: null, // ✅ Change to null
       isAssetImage: true,
-      githubUrl: 'https://github.com/HasnainChd/News-App',
+      githubUrl: 'https://github.com/yourusername/ecommerce-app',
     ),
     Project(
-      title: 'Calculator App',
+      title: 'Weather App',
       description:
-          'A simple calculator application for performing basic arithmetic operations with a clean and functional interface.',
-      technologies: ['Flutter', 'Dart'],
+          'Real-time weather application with location-based forecasts and interactive maps.',
+      technologies: ['Flutter', 'REST API', 'Geolocator', 'Dio'],
+      imageUrl: null, // ✅ Change to null
       isAssetImage: true,
-      githubUrl: 'https://github.com/HasnainChd/Calculator',
+      githubUrl: 'https://github.com/yourusername/weather-app',
     ),
   ];
 }

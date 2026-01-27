@@ -4,7 +4,6 @@ import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
 import '../widgets/project_section.dart';
 import '../widgets/skill_section.dart';
-
 import '../widgets/contact_section.dart';
 import '../widgets/nav_bar.dart';
 
@@ -58,14 +57,40 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _scrollToSection(int index) {
+    // Add these debug prints
+    debugPrint('==================');
+    debugPrint('_scrollToSection called with index: $index');
+    debugPrint('Section keys length: ${_sectionKeys.length}');
+    debugPrint('Current section: $_currentSection');
+
     final context = _sectionKeys[index].currentContext;
-    if (context != null) {
-      Scrollable.ensureVisible(
-        context,
+    debugPrint(
+        'Context for section $index: ${context != null ? "FOUND" : "NULL"}');
+
+    final RenderBox? box =
+        _sectionKeys[index].currentContext?.findRenderObject() as RenderBox?;
+    debugPrint(
+        'RenderBox for section $index: ${box != null ? "FOUND" : "NULL"}');
+
+    if (box != null) {
+      final position = box.localToGlobal(Offset.zero).dy;
+      debugPrint('Position: $position');
+
+      final currentScroll = _scrollController.offset;
+      debugPrint('Current scroll: $currentScroll');
+
+      final targetScroll = currentScroll + position - 80;
+      debugPrint('Target scroll: $targetScroll');
+
+      _scrollController.animateTo(
+        targetScroll,
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
       );
+    } else {
+      debugPrint('Box is null - cannot scroll');
     }
+    debugPrint('==================');
   }
 
   @override
@@ -73,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Scrollable content
           Container(
             decoration: const BoxDecoration(
               gradient: AppColors.backgroundGradient,
@@ -82,22 +106,34 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               child: Column(
                 children: [
-                  const SizedBox(height: 70),
-                  HeroSection(
+                  const SizedBox(height: 80),
+                  Container(
                     key: _sectionKeys[0],
-                    onViewProjectsTap: () => _scrollToSection(3),
-                    onContactTap: () => _scrollToSection(4),
+                    child: HeroSection(
+                      onViewProjectsTap: () => _scrollToSection(3),
+                      onContactTap: () => _scrollToSection(4),
+                    ),
                   ),
-                  AboutSection(key: _sectionKeys[1]),
-                  SkillsSection(key: _sectionKeys[2]),
-                  ProjectsSection(key: _sectionKeys[3]),
-                  ContactSection(key: _sectionKeys[4]),
+                  Container(
+                    key: _sectionKeys[1],
+                    child: const AboutSection(),
+                  ),
+                  Container(
+                    key: _sectionKeys[2],
+                    child: const SkillsSection(),
+                  ),
+                  Container(
+                    key: _sectionKeys[3],
+                    child: const ProjectsSection(),
+                  ),
+                  Container(
+                    key: _sectionKeys[4],
+                    child: const ContactSection(),
+                  ),
                 ],
               ),
             ),
           ),
-
-          // Fixed navbar
           Positioned(
             top: 0,
             left: 0,

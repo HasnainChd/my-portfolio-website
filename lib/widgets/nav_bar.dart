@@ -279,7 +279,9 @@ class _NavBarState extends State<NavBar> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        contentPadding: const EdgeInsets.all(20),
         title: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
@@ -294,75 +296,76 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             const SizedBox(width: 12),
-            Text(
-              'Resume',
-              style: AppTextStyles.heading3.copyWith(fontSize: 22),
+            Flexible(
+              // Make text flexible
+              child: Text(
+                'Resume',
+                style: AppTextStyles.heading3.copyWith(fontSize: 22),
+              ),
             ),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Choose an option:',
-              style: AppTextStyles.body1,
-            ),
-            const SizedBox(height: 24),
-
-            // Download button
-            _ResumeOptionButton(
-              icon: Icons.download_rounded,
-              label: 'Download Resume',
-              description: 'Save PDF to your device',
-              onTap: () async {
-                Navigator.pop(context);
-                try {
-                  await ResumeHelper.downloadResume();
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Resume downloaded successfully!'),
-                        backgroundColor: AppColors.primaryAccent,
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
+        content: SingleChildScrollView(
+          // Make content scrollable
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Choose an option:',
+                style: AppTextStyles.body1,
+              ),
+              const SizedBox(height: 20),
+              _ResumeOptionButton(
+                icon: Icons.download_rounded,
+                label: 'Download Resume',
+                description: 'Save PDF to your device',
+                onTap: () async {
+                  Navigator.pop(context);
+                  try {
+                    await ResumeHelper.downloadResume();
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Resume downloaded successfully!'),
+                          backgroundColor: AppColors.primaryAccent,
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text('Failed to download: $e'),
+                            backgroundColor: AppColors.redColor),
+                      );
+                    }
                   }
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to download: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
+                },
+              ),
+              const SizedBox(height: 12),
+              _ResumeOptionButton(
+                icon: Icons.open_in_new_rounded,
+                label: 'View Resume',
+                description: 'Open in new tab',
+                onTap: () async {
+                  Navigator.pop(context);
+                  try {
+                    await ResumeHelper.openResumeInNewTab();
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Failed to open: $e'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
-                }
-              },
-            ),
-            const SizedBox(height: 12),
-
-            // View button
-            _ResumeOptionButton(
-              icon: Icons.open_in_new_rounded,
-              label: 'View Resume',
-              description: 'Open in new tab',
-              onTap: () async {
-                Navigator.pop(context);
-                try {
-                  await ResumeHelper.openResumeInNewTab();
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to open: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -404,13 +407,7 @@ class _NavItemState extends State<_NavItem> {
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
       child: InkWell(
-        onTap: () async {
-          try {
-            _showResumeOptions(context);
-          } catch (e) {
-            debugPrint('Error with resume: $e');
-          }
-        },
+        onTap: widget.onTap,
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
           style: AppTextStyles.label.copyWith(
@@ -422,114 +419,6 @@ class _NavItemState extends State<_NavItem> {
           ),
           child: Text(widget.label),
         ),
-      ),
-    );
-  }
-
-  void _showResumeOptions(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.cardBackground,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                gradient: AppColors.accentGradient.scale(0.2),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Icon(
-                Icons.description_outlined,
-                color: AppColors.primaryAccent,
-                size: 24,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Text(
-              'Resume',
-              style: AppTextStyles.heading3.copyWith(fontSize: 22),
-            ),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Choose an option:',
-              style: AppTextStyles.body1,
-            ),
-            const SizedBox(height: 24),
-
-            // Download button
-            _ResumeOptionButton(
-              icon: Icons.download_rounded,
-              label: 'Download Resume',
-              description: 'Save PDF to your device',
-              onTap: () async {
-                Navigator.pop(context);
-                try {
-                  await ResumeHelper.downloadResume();
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Resume downloaded successfully!'),
-                        backgroundColor: AppColors.primaryAccent,
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to download: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                }
-              },
-            ),
-            const SizedBox(height: 12),
-
-            // View button
-            _ResumeOptionButton(
-              icon: Icons.open_in_new_rounded,
-              label: 'View Resume',
-              description: 'Open in new tab',
-              onTap: () async {
-                Navigator.pop(context);
-                try {
-                  await ResumeHelper.openResumeInNewTab();
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to open: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                }
-              },
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Cancel',
-              style: AppTextStyles.body1.copyWith(
-                color: AppColors.secondaryText,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -565,7 +454,7 @@ class _ResumeOptionButtonState extends State<_ResumeOptionButton> {
         borderRadius: BorderRadius.circular(12),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14), // Reduced from 16
           decoration: BoxDecoration(
             gradient: isHovered ? AppColors.accentGradient.scale(0.15) : null,
             color: isHovered ? null : AppColors.secondaryBackground,
@@ -577,40 +466,47 @@ class _ResumeOptionButtonState extends State<_ResumeOptionButton> {
             ),
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min, // Prevent unnecessary stretching
             children: [
               Icon(
                 widget.icon,
                 color: AppColors.primaryAccent,
-                size: 28,
+                size: 24, // Reduced from 28
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       widget.label,
                       style: AppTextStyles.heading4.copyWith(
-                        fontSize: 16,
+                        fontSize: 15, // Reduced from 16
                         color: isHovered
                             ? AppColors.primaryAccent
                             : AppColors.primaryText,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Text(
                       widget.description,
                       style: AppTextStyles.body2.copyWith(
-                        fontSize: 13,
+                        fontSize: 12, // Reduced from 13
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
               Icon(
                 Icons.arrow_forward_rounded,
                 color: AppColors.secondaryText,
-                size: 20,
+                size: 18, // Reduced from 20
               ),
             ],
           ),

@@ -22,18 +22,14 @@ class ResumeHelper {
 
   static Future<void> openResumeInNewTab() async {
     try {
-      // Load the PDF from assets
       final ByteData data = await rootBundle.load('assets/resume/myresume.pdf');
       final Uint8List bytes = data.buffer.asUint8List();
 
-      // Create a blob and open in new tab
       final blob = html.Blob([bytes], 'application/pdf');
       final url = html.Url.createObjectUrlFromBlob(blob);
 
-      // Open in new tab
       html.window.open(url, '_blank');
 
-      // Clean up after a delay
       Future.delayed(const Duration(seconds: 2), () {
         html.Url.revokeObjectUrl(url);
       });
