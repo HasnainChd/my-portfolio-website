@@ -57,40 +57,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _scrollToSection(int index) {
-    // Add these debug prints
-    debugPrint('==================');
-    debugPrint('_scrollToSection called with index: $index');
-    debugPrint('Section keys length: ${_sectionKeys.length}');
-    debugPrint('Current section: $_currentSection');
-
-    final context = _sectionKeys[index].currentContext;
-    debugPrint(
-        'Context for section $index: ${context != null ? "FOUND" : "NULL"}');
-
     final RenderBox? box =
         _sectionKeys[index].currentContext?.findRenderObject() as RenderBox?;
-    debugPrint(
-        'RenderBox for section $index: ${box != null ? "FOUND" : "NULL"}');
 
     if (box != null) {
       final position = box.localToGlobal(Offset.zero).dy;
-      debugPrint('Position: $position');
-
       final currentScroll = _scrollController.offset;
-      debugPrint('Current scroll: $currentScroll');
-
       final targetScroll = currentScroll + position - 80;
-      debugPrint('Target scroll: $targetScroll');
 
       _scrollController.animateTo(
         targetScroll,
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
       );
-    } else {
-      debugPrint('Box is null - cannot scroll');
     }
-    debugPrint('==================');
   }
 
   @override
