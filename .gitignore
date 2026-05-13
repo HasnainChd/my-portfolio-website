@@ -43,3 +43,25 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Generated files
+.flutter-plugins
+.flutter-plugins-dependencies
+.generated/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+*.stamp
+*.dill
+*.bin
+*.json
+*.frag
+*.ttf
+*.otf
+*.png
+*.pdf
+*.js
+*.dart
+*.toml
+*.html

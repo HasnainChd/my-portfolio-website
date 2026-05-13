@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_website/screens/home_screen.dart';
 import 'package:portfolio_website/utils/app_colors.dart';
 
@@ -18,6 +19,12 @@ class PortfolioApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: AppColors.primaryBackground,
+          textTheme: GoogleFonts.poppinsTextTheme(
+            ThemeData(brightness: Brightness.dark).textTheme,
+          ).apply(
+            bodyColor: AppColors.secondaryText,
+            displayColor: AppColors.primaryText,
+          ),
         ),
         home: HomeScreen());
   }

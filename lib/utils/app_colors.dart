@@ -6,9 +6,10 @@ class AppColors {
   static const Color cardBackground = Color(0xFF1A1F3A);
   static const Color redColor = Color(0xFFF44336);
 
-  static const Color primaryAccent = Color(0xFF5B78FF);
-  static const Color secondaryAccent = Color(0xFF9D4EDD);
-  static const Color tertiaryAccent = Color(0xFF00D9FF);
+  /// Bold electric blue → cyan gradient anchors (navy base unchanged).
+  static const Color primaryAccent = Color(0xFF0099FF);
+  static const Color secondaryAccent = Color(0xFF00E5FF);
+  static const Color tertiaryAccent = Color(0xFF5CE1FF);
 
   // Text colors
   static const Color primaryText = Color(0xFFFFFFFF);
@@ -26,14 +27,18 @@ class AppColors {
   );
 
   static const LinearGradient accentGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
     colors: [primaryAccent, secondaryAccent],
   );
 
   static const LinearGradient buttonGradient = LinearGradient(
-    colors: [Color(0xFF5B78FF), Color(0xFF9D4EDD)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [primaryAccent, secondaryAccent],
   );
 
   // Glow/Shadow colors
-  static Color primaryGlow = primaryAccent.withValues(alpha: 0.3);
-  static Color secondaryGlow = secondaryAccent.withValues(alpha: 0.3);
+  static Color primaryGlow = primaryAccent.withValues(alpha: 0.35);
+  static Color secondaryGlow = secondaryAccent.withValues(alpha: 0.35);
 }
