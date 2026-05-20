@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_website/utils/extension.dart';
-import 'package:portfolio_website/widgets/animated_section.dart';
+
+import '../models/skill_group.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constant.dart';
-import '../utils/app_styles.dart';
-import '../utils/responsive.dart';
 import '../utils/app_data.dart';
+import '../utils/app_styles.dart';
+import '../utils/extension.dart';
+import '../utils/responsive.dart';
+import 'animated_section.dart';
 import 'skill_chip.dart';
 
 class SkillsSection extends StatelessWidget {
@@ -23,8 +25,8 @@ class SkillsSection extends StatelessWidget {
         ),
         vertical: Responsive.value(
           context,
-          mobile: 80.0,
-          desktop: 120.0,
+          mobile: 60.0,
+          desktop: 80.0,
         ),
       ),
       child: Center(
@@ -35,11 +37,8 @@ class SkillsSection extends StatelessWidget {
               AnimatedSection(
                 child: Column(
                   children: [
-                    // Section label
                     _buildSectionLabel('MY SKILLS'),
                     16.height,
-
-                    // Section title
                     Text(
                       'Technologies I Work With',
                       style: AppTextStyles.heading1.copyWith(
@@ -53,8 +52,6 @@ class SkillsSection extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     16.height,
-
-                    // Decorative line
                     Container(
                       width: 100,
                       height: 4,
@@ -64,8 +61,6 @@ class SkillsSection extends StatelessWidget {
                       ),
                     ),
                     24.height,
-
-                    // Subtitle
                     SizedBox(
                       width: Responsive.value(
                         context,
@@ -73,7 +68,7 @@ class SkillsSection extends StatelessWidget {
                         desktop: 700.0,
                       ),
                       child: Text(
-                        'Here are some of the technologies and tools I use to bring ideas to life',
+                        'Skills grouped by how I use them across mobile, backend, architecture, quality, and shipping.',
                         style: AppTextStyles.body1.copyWith(
                           fontSize: Responsive.value(
                             context,
@@ -88,28 +83,18 @@ class SkillsSection extends StatelessWidget {
                   ],
                 ),
               ),
-              48.height,
-
-              // Skills grid
-              AnimatedSection(
-                delay: const Duration(milliseconds: 200),
-                child: Wrap(
-                  spacing: Responsive.value(
-                    context,
-                    mobile: 12.0,
-                    desktop: 16.0,
+              32.height,
+              ...AppData.skillGroups.asMap().entries.map((entry) {
+                final index = entry.key;
+                final group = entry.value;
+                return AnimatedSection(
+                  delay: Duration(milliseconds: 120 * index),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: _SkillCategoryBlock(group: group),
                   ),
-                  runSpacing: Responsive.value(
-                    context,
-                    mobile: 12.0,
-                    desktop: 16.0,
-                  ),
-                  alignment: WrapAlignment.center,
-                  children: AppData.skills.map((skill) {
-                    return SkillChip(skillName: skill.name);
-                  }).toList(),
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ),
@@ -138,6 +123,96 @@ class SkillsSection extends StatelessWidget {
           fontWeight: FontWeight.w600,
           letterSpacing: 1.5,
         ),
+      ),
+    );
+  }
+}
+
+class _SkillCategoryBlock extends StatelessWidget {
+  final SkillGroup group;
+
+  const _SkillCategoryBlock({required this.group});
+
+  Color _getCategoryColor(String title) {
+    if (title.contains('Mobile')) {
+      return AppColors.mobileCategoryTint;
+    } else if (title.contains('Backend')) {
+      return AppColors.backendCategoryTint;
+    } else if (title.contains('State')) {
+      return AppColors.stateCategoryTint;
+    } else if (title.contains('Testing')) {
+      return AppColors.testingCategoryTint;
+    } else if (title.contains('Deployment')) {
+      return AppColors.deploymentCategoryTint;
+    }
+    return AppColors.cardBackground;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: _getCategoryColor(group.title),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.secondaryBackground,
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 4,
+                height: Responsive.value(
+                  context,
+                  mobile: 24.0,
+                  desktop: 28.0,
+                ),
+                decoration: BoxDecoration(
+                  gradient: AppColors.accentGradient,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              12.width,
+              Text(
+                group.title,
+                style: AppTextStyles.heading4.copyWith(
+                  fontSize: Responsive.value(
+                    context,
+                    mobile: 17.0,
+                    desktop: 19.0,
+                  ),
+                  color: AppColors.primaryText,
+                ),
+              ),
+            ],
+          ),
+          16.height,
+          Wrap(
+            spacing: Responsive.value(
+              context,
+              mobile: 12.0,
+              desktop: 14.0,
+            ),
+            runSpacing: Responsive.value(
+              context,
+              mobile: 12.0,
+              desktop: 14.0,
+            ),
+            children: group.skills
+                .map(
+                  (skill) => SkillChip(
+                    skillName: skill.name,
+                    icon: skill.icon,
+                  ),
+                )
+                .toList(),
+          ),
+        ],
       ),
     );
   }

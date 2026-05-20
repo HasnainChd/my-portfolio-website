@@ -5,6 +5,7 @@ import '../widgets/about_section.dart';
 import '../widgets/project_section.dart';
 import '../widgets/skill_section.dart';
 import '../widgets/contact_section.dart';
+import '../widgets/experience_section.dart';
 import '../widgets/nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentSection = 0;
 
   final List<GlobalKey> _sectionKeys = List.generate(
-    5,
+    6,
     (index) => GlobalKey(),
   );
 
@@ -73,6 +74,24 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Widget _buildDivider() {
+    return Container(
+      height: 1,
+      margin: const EdgeInsets.symmetric(vertical: 0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.transparent,
+            AppColors.secondaryAccent.withValues(alpha: 0.3),
+            Colors.transparent,
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,24 +109,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     key: _sectionKeys[0],
                     child: HeroSection(
-                      onViewProjectsTap: () => _scrollToSection(3),
-                      onContactTap: () => _scrollToSection(4),
+                      onViewProjectsTap: () => _scrollToSection(4),
+                      onContactTap: () => _scrollToSection(5),
                     ),
                   ),
+                  _buildDivider(),
                   Container(
                     key: _sectionKeys[1],
                     child: const AboutSection(),
                   ),
+                  _buildDivider(),
                   Container(
                     key: _sectionKeys[2],
-                    child: const SkillsSection(),
+                    child: const ExperienceSection(),
                   ),
+                  _buildDivider(),
                   Container(
                     key: _sectionKeys[3],
-                    child: const ProjectsSection(),
+                    child: const SkillsSection(),
                   ),
+                  _buildDivider(),
                   Container(
                     key: _sectionKeys[4],
+                    child: const ProjectsSection(),
+                  ),
+                  _buildDivider(),
+                  Container(
+                    key: _sectionKeys[5],
                     child: const ContactSection(),
                   ),
                 ],

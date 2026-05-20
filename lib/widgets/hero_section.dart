@@ -1,7 +1,10 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
 import '../utils/app_colors.dart';
-import '../utils/app_styles.dart';
 import '../utils/app_constant.dart';
+import '../utils/app_styles.dart';
 import '../utils/extension.dart';
 import '../utils/responsive.dart';
 
@@ -75,6 +78,19 @@ class HeroSection extends StatelessWidget {
 
   Widget _buildTextContent(BuildContext context) {
     final isMobile = !Responsive.isDesktop(context);
+    final titleFontSize = Responsive.value(
+      context,
+      mobile: 28.0,
+      tablet: 40.0,
+      desktop: 52.0,
+    );
+    final titleLineHeight = titleFontSize * 1.25;
+
+    final titleStyle = AppTextStyles.heading1.copyWith(
+      fontSize: titleFontSize,
+      color: Colors.white,
+      height: 1.15,
+    );
 
     return Column(
       crossAxisAlignment:
@@ -102,7 +118,10 @@ class HeroSection extends StatelessWidget {
               style: TextStyle(fontSize: 24),
             ),
           ],
-        ),
+        )
+            .animate()
+            .fadeIn(duration: 450.ms, curve: Curves.easeOut)
+            .slideY(begin: 0.06, end: 0, duration: 450.ms, curve: Curves.easeOutCubic),
         20.height,
 
         Text(
@@ -116,26 +135,67 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           textAlign: isMobile ? TextAlign.center : TextAlign.left,
-        ),
+        )
+            .animate()
+            .fadeIn(delay: 80.ms, duration: 550.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.12,
+                end: 0,
+                delay: 80.ms,
+                duration: 550.ms,
+                curve: Curves.easeOutCubic),
         16.height,
 
         ShaderMask(
           shaderCallback: (bounds) =>
               AppColors.accentGradient.createShader(bounds),
-          child: Text(
-            AppConstants.title,
-            style: AppTextStyles.heading1.copyWith(
-              fontSize: Responsive.value(
-                context,
-                mobile: 28.0,
-                tablet: 40.0,
-                desktop: 52.0,
-              ),
-              color: Colors.white,
+          blendMode: BlendMode.srcIn,
+          child: SizedBox(
+            height: titleLineHeight + 8,
+            width: Responsive.value(
+              context,
+              mobile: double.infinity,
+              desktop: 700.0,
             ),
-            textAlign: isMobile ? TextAlign.center : TextAlign.left,
+            child: Align(
+              alignment:
+                  isMobile ? Alignment.center : Alignment.centerLeft,
+              child: DefaultTextStyle(
+                style: titleStyle,
+                textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                child: AnimatedTextKit(
+                  repeatForever: true,
+                  pause: const Duration(milliseconds: 1400),
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'Flutter Developer',
+                      textStyle: titleStyle,
+                      speed: const Duration(milliseconds: 55),
+                    ),
+                    TyperAnimatedText(
+                      'Mobile App Developer',
+                      textStyle: titleStyle,
+                      speed: const Duration(milliseconds: 55),
+                    ),
+                    TyperAnimatedText(
+                      'Cross-Platform Developer',
+                      textStyle: titleStyle,
+                      speed: const Duration(milliseconds: 45),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+        )
+            .animate()
+            .fadeIn(delay: 140.ms, duration: 500.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.1,
+                end: 0,
+                delay: 140.ms,
+                duration: 500.ms,
+                curve: Curves.easeOutCubic),
         28.height,
 
         SizedBox(
@@ -157,10 +217,17 @@ class HeroSection extends StatelessWidget {
             ),
             textAlign: isMobile ? TextAlign.center : TextAlign.left,
           ),
-        ),
+        )
+            .animate()
+            .fadeIn(delay: 220.ms, duration: 550.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.08,
+                end: 0,
+                delay: 220.ms,
+                duration: 550.ms,
+                curve: Curves.easeOutCubic),
         40.height,
 
-        // CTA Buttons - NOW WITH CALLBACKS
         Wrap(
           alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
           spacing: 16,
@@ -168,14 +235,22 @@ class HeroSection extends StatelessWidget {
           children: [
             _buildPrimaryButton(
               label: 'View Projects',
-              onTap: onViewProjectsTap ?? () {}, // Use callback
+              onTap: onViewProjectsTap ?? () {},
             ),
             _buildSecondaryButton(
               label: 'Contact Me',
-              onTap: onContactTap ?? () {}, // Use callback
+              onTap: onContactTap ?? () {},
             ),
           ],
-        ),
+        )
+            .animate()
+            .fadeIn(delay: 300.ms, duration: 550.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.1,
+                end: 0,
+                delay: 300.ms,
+                duration: 550.ms,
+                curve: Curves.easeOutCubic),
       ],
     );
   }
@@ -220,7 +295,6 @@ class HeroSection extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                   errorBuilder: (context, error, stackTrace) {
-                    // Fallback if image doesn't load
                     return Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -247,7 +321,16 @@ class HeroSection extends StatelessWidget {
           ),
         ),
       ),
-    );
+      )
+          .animate()
+          .fadeIn(delay: 180.ms, duration: 650.ms, curve: Curves.easeOut)
+          .scale(
+            begin: const Offset(0.92, 0.92),
+            end: const Offset(1, 1),
+            delay: 180.ms,
+            duration: 650.ms,
+            curve: Curves.easeOutCubic,
+          );
   }
 
   Widget _buildPrimaryButton({

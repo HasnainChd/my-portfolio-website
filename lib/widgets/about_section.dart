@@ -21,8 +21,8 @@ class AboutSection extends StatelessWidget {
         ),
         vertical: Responsive.value(
           context,
-          mobile: 80.0,
-          desktop: 120.0,
+          mobile: 60.0,
+          desktop: 80.0,
         ),
       ),
       child: Center(
@@ -69,14 +69,10 @@ class AboutSection extends StatelessWidget {
                     desktop: 900.0,
                   ),
                   child: Text(
-                    'I\'m a Junior Flutter Developer with a passion for creating beautiful, '
-                    'performant, and user-friendly mobile applications. Currently working at '
-                    'NextPak Agile Solutions, I focus on building cross-platform solutions that '
-                    'deliver great experiences on both iOS and Android.\n\n'
-                    'I love learning new technologies, writing clean code, and solving '
-                    'challenging problems. When I\'m not coding, you can find me exploring '
-                    'new Flutter packages, contributing to open source, or learning about '
-                    'the latest mobile development trends.',
+                    'I\'m a Flutter Developer with 1+ year of professional experience building '
+                    'cross-platform mobile applications. I worked at Nextpak Agile Solutions where '
+                    'I contributed to real-world projects — building responsive UIs, integrating '
+                    'REST APIs, working with Firebase & Supabase, and delivering apps on time.',
                     style: AppTextStyles.body1.copyWith(
                       fontSize: Responsive.value(
                         context,
@@ -89,7 +85,7 @@ class AboutSection extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                60.height,
+                40.height,
 
                 // Stats/Highlights (optional)
                 AnimatedSection(
@@ -112,14 +108,14 @@ class AboutSection extends StatelessWidget {
                       _buildStatCard(
                         context,
                         icon: Icons.work_outline_rounded,
-                        value: '10+',
-                        label: 'Projects Completed',
+                        value: '2',
+                        label: 'Projects Delivered',
                       ),
                       _buildStatCard(
                         context,
                         icon: Icons.emoji_events_outlined,
                         value: '5+',
-                        label: 'Happy Clients',
+                        label: 'Technologies Mastered',
                       ),
                     ],
                   ),
@@ -163,62 +159,168 @@ class AboutSection extends StatelessWidget {
     required String value,
     required String label,
   }) {
-    return Container(
-      width: Responsive.value(
-        context,
-        mobile: 140.0,
-        desktop: 180.0,
-      ),
-      padding: EdgeInsets.all(
-        Responsive.value(
+    return _StatCard(
+      icon: icon,
+      value: value,
+      label: label,
+    );
+  }
+}
+
+class _StatCard extends StatefulWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+
+  const _StatCard({
+    required this.icon,
+    required this.value,
+    required this.label,
+  });
+
+  @override
+  State<_StatCard> createState() => _StatCardState();
+}
+
+class _StatCardState extends State<_StatCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _shimmerController;
+  late Animation<double> _shimmerAnimation;
+  bool isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _shimmerController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
+    _shimmerAnimation = Tween<double>(begin: -1.0, end: 2.0).animate(
+      CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _shimmerController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() => isHovered = true);
+        _shimmerController.repeat();
+      },
+      onExit: (_) {
+        setState(() => isHovered = false);
+        _shimmerController.stop();
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: Responsive.value(
           context,
-          mobile: 20.0,
-          desktop: 24.0,
+          mobile: 140.0,
+          desktop: 180.0,
         ),
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.secondaryBackground,
-          width: 1,
-        ),
-      ),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              gradient: AppColors.accentGradient.scale(0.2),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: AppColors.primaryAccent,
-            ),
+        padding: EdgeInsets.all(
+          Responsive.value(
+            context,
+            mobile: 20.0,
+            desktop: 24.0,
           ),
-          16.height,
-          Text(
-            value,
-            style: AppTextStyles.heading2.copyWith(
-              fontSize: Responsive.value(
-                context,
-                mobile: 32.0,
-                desktop: 40.0,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isHovered
+                ? AppColors.primaryAccent
+                : AppColors.secondaryBackground,
+            width: isHovered ? 2 : 1,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    gradient: AppColors.accentGradient.scale(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    widget.icon,
+                    size: 28,
+                    color: AppColors.primaryAccent,
+                  ),
+                ),
+                16.height,
+                Text(
+                  widget.value,
+                  style: AppTextStyles.heading2.copyWith(
+                    fontSize: Responsive.value(
+                      context,
+                      mobile: 32.0,
+                      desktop: 40.0,
+                    ),
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                8.height,
+                Text(
+                  widget.label,
+                  style: AppTextStyles.body2.copyWith(
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            if (isHovered)
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: AnimatedBuilder(
+                    animation: _shimmerAnimation,
+                    builder: (context, child) {
+                      return ShaderMask(
+                        shaderCallback: (bounds) {
+                          return LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.transparent,
+                              AppColors.primaryAccent.withValues(alpha: 0.3),
+                              Colors.transparent,
+                            ],
+                            stops: [
+                              0.0,
+                              _shimmerAnimation.value.clamp(0.0, 1.0),
+                              1.0,
+                            ],
+                          ).createShader(bounds);
+                        },
+                        blendMode: BlendMode.srcATop,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.primaryAccent
+                                  .withValues(alpha: 0.5),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          8.height,
-          Text(
-            label,
-            style: AppTextStyles.body2.copyWith(
-              fontSize: 14,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -23,8 +23,8 @@ class ProjectsSection extends StatelessWidget {
         ),
         vertical: Responsive.value(
           context,
-          mobile: 80.0,
-          desktop: 120.0,
+          mobile: 60.0,
+          desktop: 80.0,
         ),
       ),
       child: Center(

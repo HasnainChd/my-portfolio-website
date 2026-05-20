@@ -23,9 +23,10 @@ class _NavBarState extends State<NavBar> {
   final List<String> navItems = [
     'HOME',
     'ABOUT',
+    'EXPERIENCE',
     'SKILLS',
     'PROJECTS',
-    'CONTACT'
+    'CONTACT',
   ];
 
   @override
@@ -40,7 +41,7 @@ class _NavBarState extends State<NavBar> {
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.primaryBackground.withValues(alpha: 0.8),
+        color: AppColors.primaryBackground.withValues(alpha: 0.95),
         border: Border(
           bottom: BorderSide(
             color: AppColors.secondaryBackground.withValues(alpha: 0.5),

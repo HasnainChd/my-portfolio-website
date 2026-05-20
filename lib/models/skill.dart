@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+
 class Skill {
   final String name;
-  final String? iconPath;
+  final IconData icon;
+
   const Skill({
     required this.name,
-    this.iconPath,
+    required this.icon,
   });
 }

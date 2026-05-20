@@ -41,4 +41,27 @@ class AppColors {
   // Glow/Shadow colors
   static Color primaryGlow = primaryAccent.withValues(alpha: 0.35);
   static Color secondaryGlow = secondaryAccent.withValues(alpha: 0.35);
+
+  // Category background colors
+  static const Color mobileCategory = Color(0xFF2196F3);
+  static const Color backendCategory = Color(0xFF4CAF50);
+  static const Color stateCategory = Color(0xFF9C27B0);
+  static const Color testingCategory = Color(0xFFFF9800);
+  static const Color deploymentCategory = Color(0xFF00BCD4);
+
+  static Color mobileCategoryTint = mobileCategory.withValues(alpha: 0.1);
+  static Color backendCategoryTint = backendCategory.withValues(alpha: 0.1);
+  static Color stateCategoryTint = stateCategory.withValues(alpha: 0.1);
+  static Color testingCategoryTint = testingCategory.withValues(alpha: 0.1);
+  static Color deploymentCategoryTint =
+      deploymentCategory.withValues(alpha: 0.1);
+
+  // Project gradient colors
+  static const Color tealpotStart = Color(0xFF0F2027);
+  static const Color tealpotMiddle = Color(0xFF203A43);
+  static const Color tealpotEnd = Color(0xFF2C5364);
+
+  static const Color serviceProStart = Color(0xFF1a1a2e);
+  static const Color serviceProMiddle = Color(0xFF16213e);
+  static const Color serviceProEnd = Color(0xFF0f3460);
 }
