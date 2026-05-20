@@ -7,6 +7,7 @@
 .atom/
 .build/
 .buildlog/
+build/flutter_assets/NOTICES
 .history
 .svn/
 .swiftpm/
@@ -62,6 +63,6 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 *.png
 *.pdf
 *.js
-*.dart
 *.toml
 *.html
+macos/Flutter/GeneratedPluginRegistrant.swift
