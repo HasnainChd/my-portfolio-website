@@ -15,9 +15,9 @@ class AppConstants {
   static const String name = "Muhammad Hasnain";
   static const String title = "Flutter Developer";
   static const String email = "naindev309@gmail.com";
-  static const String github = "github.com/hasnainChd";
+  static const String github = "github.com/Muhammad-Hasnain67";
   static const String linkedin = "linkedin.com/in/muhammad-hasnain";
 
-  static const String githubUsername = "HasnainChd";
+  static const String githubUsername = "Muhammad-Hasnain67";
   static const String linkedinProfile = "muhammad-hasnain309";
 }

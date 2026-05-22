@@ -69,8 +69,8 @@ class AboutSection extends StatelessWidget {
                     desktop: 900.0,
                   ),
                   child: Text(
-                    'I\'m a Flutter Developer with 1+ year of professional experience building '
-                    'cross-platform mobile applications. I worked at Nextpak Agile Solutions where '
+                    'I\'m a Flutter Developer with 1.5+ years of professional experience building '
+                    'cross-platform mobile applications. Previously at Nextpak Agile Solutions, Rawalpindi, '
                     'I contributed to real-world projects — building responsive UIs, integrating '
                     'REST APIs, working with Firebase & Supabase, and delivering apps on time.',
                     style: AppTextStyles.body1.copyWith(
@@ -102,8 +102,8 @@ class AboutSection extends StatelessWidget {
                       _buildStatCard(
                         context,
                         icon: Icons.code_rounded,
-                        value: '1+',
-                        label: 'Year Experience',
+                        value: '1.5+',
+                        label: 'Years Experience',
                       ),
                       _buildStatCard(
                         context,

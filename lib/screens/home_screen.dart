@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../utils/app_colors.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
@@ -18,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   int _currentSection = 0;
+  Timer? _scrollDownTimer;
+  Timer? _scrollUpTimer;
 
   final List<GlobalKey> _sectionKeys = List.generate(
     6,
@@ -33,7 +37,39 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _scrollDownTimer?.cancel();
+    _scrollUpTimer?.cancel();
     super.dispose();
+  }
+
+  void _startScrollDown() {
+    _scrollDownTimer?.cancel();
+    _scrollDownTimer =
+        Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final newOffset = (_scrollController.offset + 20).clamp(0.0, maxScroll);
+      _scrollController.jumpTo(newOffset);
+      if (newOffset >= maxScroll) {
+        timer.cancel();
+      }
+    });
+  }
+
+  void _startScrollUp() {
+    _scrollUpTimer?.cancel();
+    _scrollUpTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+      final newOffset = (_scrollController.offset - 20)
+          .clamp(0.0, _scrollController.position.maxScrollExtent);
+      _scrollController.jumpTo(newOffset);
+      if (newOffset <= 0) {
+        timer.cancel();
+      }
+    });
+  }
+
+  void _stopScroll() {
+    _scrollDownTimer?.cancel();
+    _scrollUpTimer?.cancel();
   }
 
   void _onScroll() {
@@ -95,63 +131,93 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: AppColors.backgroundGradient,
-            ),
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  Container(
-                    key: _sectionKeys[0],
-                    child: HeroSection(
-                      onViewProjectsTap: () => _scrollToSection(4),
-                      onContactTap: () => _scrollToSection(5),
-                    ),
+      body: Focus(
+        autofocus: true,
+        onKeyEvent: (node, event) {
+          if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+            if (event is KeyDownEvent) {
+              _startScrollDown();
+              return KeyEventResult.handled;
+            } else if (event is KeyUpEvent) {
+              _stopScroll();
+              return KeyEventResult.handled;
+            }
+          }
+          if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+            if (event is KeyDownEvent) {
+              _startScrollUp();
+              return KeyEventResult.handled;
+            } else if (event is KeyUpEvent) {
+              _stopScroll();
+              return KeyEventResult.handled;
+            }
+          }
+          return KeyEventResult.ignored;
+        },
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                gradient: AppColors.backgroundGradient,
+              ),
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  physics: const BouncingScrollPhysics(),
+                ),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 80),
+                      Container(
+                        key: _sectionKeys[0],
+                        child: HeroSection(
+                          onViewProjectsTap: () => _scrollToSection(4),
+                          onContactTap: () => _scrollToSection(5),
+                        ),
+                      ),
+                      _buildDivider(),
+                      Container(
+                        key: _sectionKeys[1],
+                        child: const AboutSection(),
+                      ),
+                      _buildDivider(),
+                      Container(
+                        key: _sectionKeys[2],
+                        child: const ExperienceSection(),
+                      ),
+                      _buildDivider(),
+                      Container(
+                        key: _sectionKeys[3],
+                        child: const SkillsSection(),
+                      ),
+                      _buildDivider(),
+                      Container(
+                        key: _sectionKeys[4],
+                        child: const ProjectsSection(),
+                      ),
+                      _buildDivider(),
+                      Container(
+                        key: _sectionKeys[5],
+                        child: const ContactSection(),
+                      ),
+                    ],
                   ),
-                  _buildDivider(),
-                  Container(
-                    key: _sectionKeys[1],
-                    child: const AboutSection(),
-                  ),
-                  _buildDivider(),
-                  Container(
-                    key: _sectionKeys[2],
-                    child: const ExperienceSection(),
-                  ),
-                  _buildDivider(),
-                  Container(
-                    key: _sectionKeys[3],
-                    child: const SkillsSection(),
-                  ),
-                  _buildDivider(),
-                  Container(
-                    key: _sectionKeys[4],
-                    child: const ProjectsSection(),
-                  ),
-                  _buildDivider(),
-                  Container(
-                    key: _sectionKeys[5],
-                    child: const ContactSection(),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: NavBar(
-              currentIndex: _currentSection,
-              onNavItemTapped: _scrollToSection,
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: NavBar(
+                currentIndex: _currentSection,
+                onNavItemTapped: _scrollToSection,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

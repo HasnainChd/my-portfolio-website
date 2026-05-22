@@ -4,7 +4,7 @@ import '../models/skill.dart';
 import '../models/skill_group.dart';
 
 class AppData {
-  static const String githubProfile = 'https://github.com/muhammadhasnain';
+  static const String githubProfile = 'https://github.com/Muhammad-Hasnain67';
 
   static const List<SkillGroup> skillGroups = [
     SkillGroup(
@@ -50,12 +50,12 @@ class AppData {
     Project(
       title: 'Tealpot',
       description:
-          'A cross-platform mobile application with real-time features, built using Flutter and Firebase.',
-      tagline: 'A cross-platform mobile app with real-time features',
+          'A platform connecting businesses with vetted blue-collar professionals on demand, built with Flutter.',
+      tagline: 'Connecting businesses with skilled blue-collar workers',
       technologies: [
         'Flutter',
         'Dart',
-        'Firebase',
+        'Provider',
         'REST APIs',
       ],
       screenshotPaths: [
@@ -71,17 +71,19 @@ class AppData {
           'https://play.google.com/store/apps/details?id=com.tealpot.tealpot&pcampaignid=web_share',
       githubUrl: null,
       keyFeatures: [
-        'Real-time features with Firebase integration',
-        'Clean and responsive UI across iOS & Android',
-        'REST API integration',
-        'Smooth user experience with Flutter animations',
+        'Business and worker matching platform',
+        'Background-checked and vetted professional profiles',
+        'Real-time job posting and application system',
+        'Responsive UI across iOS and Android',
+        'Firebase integration for real-time data',
+        'REST API integration with clean architecture',
       ],
     ),
     Project(
       title: 'ServicePro360',
       description:
-          'A service management cross-platform mobile app built with Flutter, featuring clean architecture and REST API integration.',
-      tagline: 'A service management solution built with Flutter',
+          'A field service management app for managing jobs, quotes, invoices and field workers — similar to Jobber.',
+      tagline: 'Complete field service management in your pocket',
       technologies: [
         'Flutter',
         'Dart',
@@ -98,36 +100,43 @@ class AppData {
       playStoreUrl: null,
       githubUrl: null,
       keyFeatures: [
-        'Service management workflow for businesses',
-        'Job and invoice tracking system',
-        'Built with GetX state management',
-        'REST API integration with clean architecture',
+        'Job and work order management',
+        'Quote and invoice generation and tracking',
+        'Field worker assignment and scheduling',
+        'Workflow overview dashboard with real-time stats',
+        'Requests, approvals and status tracking',
+        'Built with Flutter, GetX and REST API integration',
       ],
     ),
     Project(
       title: 'New Leaf',
       description:
-          'A habit-tracking mobile app to help users leave marijuana, featuring progress tracking and motivational UI built with Flutter and Supabase.',
-      tagline: 'A habit-tracking app for personal growth',
+          'A habit-tracking app to help users quit marijuana, with mood tracking, journaling, and daily progress tools.',
+      tagline: 'Your gentle guide to a marijuana-free lifestyle',
       technologies: [
         'Flutter',
         'Dart',
         'Supabase',
-        'Provider',
+        'GetX',
       ],
       screenshotPaths: [
         'assets/images/projects/newleaf/screen1.jpeg',
         'assets/images/projects/newleaf/screen2.jpeg',
         'assets/images/projects/newleaf/screen3.jpeg',
         'assets/images/projects/newleaf/screen4.jpeg',
+        'assets/images/projects/newleaf/screen5.jpeg',
+        'assets/images/projects/newleaf/screen6.jpeg',
       ],
       playStoreUrl: null,
       githubUrl: null,
       keyFeatures: [
-        'Habit tracking and progress monitoring',
-        'Daily control center with journal and craving tracker',
-        'Built with Supabase backend',
-        'Motivational UI to support personal growth',
+        'Daily progress tracker with streak and percentage',
+        'Mood tracking to monitor emotional patterns',
+        'Journal & Reflect — daily motivational journaling',
+        'Craving tracker to identify and manage triggers',
+        'Workbook with guided exercises (Why I smoke, Why I want to quit)',
+        'Daily control center — Journal, Craving, Consumption tracking',
+        'Built with Flutter and Supabase backend',
       ],
     ),
   ];

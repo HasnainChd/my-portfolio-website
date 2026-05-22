@@ -301,7 +301,7 @@ class _ProjectDetailsModalState extends State<ProjectDetailsModal> {
     final sliderHeight = Responsive.value(
       context,
       mobile: 250.0,
-      desktop: 400.0,
+      desktop: 480.0,
     );
 
     return Container(
@@ -318,6 +318,7 @@ class _ProjectDetailsModalState extends State<ProjectDetailsModal> {
             itemBuilder: (context, index) {
               return Container(
                 color: const Color(0xFF0D1117),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Image.asset(
                   widget.project.screenshotPaths[index],
                   width: double.infinity,

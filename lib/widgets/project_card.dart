@@ -80,7 +80,7 @@ class _ProjectCardState extends State<ProjectCard> {
                   height: Responsive.value(
                     context,
                     mobile: 220.0,
-                    desktop: 280.0,
+                    desktop: 320.0,
                   ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0D1117),
@@ -218,18 +218,6 @@ class _ProjectCardState extends State<ProjectCard> {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      8.height,
-
-                      // Tagline
-                      if (widget.project.tagline != null)
-                        Text(
-                          widget.project.tagline!,
-                          style: AppTextStyles.caption.copyWith(
-                            fontSize: 13,
-                            fontStyle: FontStyle.italic,
-                            color: AppColors.primaryAccent,
-                          ),
-                        ),
                       16.height,
                       Text(
                         'Tech stack',
