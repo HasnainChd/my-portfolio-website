@@ -8,6 +8,106 @@ import '../utils/app_styles.dart';
 import '../utils/extension.dart';
 import '../utils/responsive.dart';
 
+class _OpenToWorkIndicator extends StatefulWidget {
+  const _OpenToWorkIndicator();
+
+  @override
+  State<_OpenToWorkIndicator> createState() => _OpenToWorkIndicatorState();
+}
+
+class _OpenToWorkIndicatorState extends State<_OpenToWorkIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    )..repeat();
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 2.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+    _fadeAnimation = Tween<double>(begin: 0.8, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.successGreen.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppColors.successGreen.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 16,
+            height: 16,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _scaleAnimation.value,
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: AppColors.successGreen.withValues(
+                            alpha: _fadeAnimation.value,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: AppColors.successGreen,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            'Open to Work',
+            style: AppTextStyles.label.copyWith(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: AppColors.successGreen,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class HeroSection extends StatelessWidget {
   final VoidCallback? onViewProjectsTap;
   final VoidCallback? onContactTap;
@@ -97,6 +197,15 @@ class HeroSection extends StatelessWidget {
           isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const _OpenToWorkIndicator()
+            .animate()
+            .fadeIn(duration: 450.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.06,
+                end: 0,
+                duration: 450.ms,
+                curve: Curves.easeOutCubic),
+        16.height,
         Row(
           mainAxisSize: isMobile ? MainAxisSize.min : MainAxisSize.max,
           children: [
@@ -120,10 +229,14 @@ class HeroSection extends StatelessWidget {
           ],
         )
             .animate()
-            .fadeIn(duration: 450.ms, curve: Curves.easeOut)
-            .slideY(begin: 0.06, end: 0, duration: 450.ms, curve: Curves.easeOutCubic),
+            .fadeIn(delay: 50.ms, duration: 450.ms, curve: Curves.easeOut)
+            .slideY(
+                begin: 0.06,
+                end: 0,
+                delay: 50.ms,
+                duration: 450.ms,
+                curve: Curves.easeOutCubic),
         20.height,
-
         Text(
           AppConstants.name,
           style: AppTextStyles.display.copyWith(
@@ -145,7 +258,6 @@ class HeroSection extends StatelessWidget {
                 duration: 550.ms,
                 curve: Curves.easeOutCubic),
         16.height,
-
         ShaderMask(
           shaderCallback: (bounds) =>
               AppColors.accentGradient.createShader(bounds),
@@ -158,8 +270,7 @@ class HeroSection extends StatelessWidget {
               desktop: 700.0,
             ),
             child: Align(
-              alignment:
-                  isMobile ? Alignment.center : Alignment.centerLeft,
+              alignment: isMobile ? Alignment.center : Alignment.centerLeft,
               child: DefaultTextStyle(
                 style: titleStyle,
                 textAlign: isMobile ? TextAlign.center : TextAlign.left,
@@ -197,7 +308,6 @@ class HeroSection extends StatelessWidget {
                 duration: 500.ms,
                 curve: Curves.easeOutCubic),
         28.height,
-
         SizedBox(
           width: Responsive.value(
             context,
@@ -227,7 +337,6 @@ class HeroSection extends StatelessWidget {
                 duration: 550.ms,
                 curve: Curves.easeOutCubic),
         40.height,
-
         Wrap(
           alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
           spacing: 16,
@@ -321,16 +430,16 @@ class HeroSection extends StatelessWidget {
           ),
         ),
       ),
-      )
-          .animate()
-          .fadeIn(delay: 180.ms, duration: 650.ms, curve: Curves.easeOut)
-          .scale(
-            begin: const Offset(0.92, 0.92),
-            end: const Offset(1, 1),
-            delay: 180.ms,
-            duration: 650.ms,
-            curve: Curves.easeOutCubic,
-          );
+    )
+        .animate()
+        .fadeIn(delay: 180.ms, duration: 650.ms, curve: Curves.easeOut)
+        .scale(
+          begin: const Offset(0.92, 0.92),
+          end: const Offset(1, 1),
+          delay: 180.ms,
+          duration: 650.ms,
+          curve: Curves.easeOutCubic,
+        );
   }
 
   Widget _buildPrimaryButton({

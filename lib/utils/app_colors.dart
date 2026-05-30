@@ -16,6 +16,9 @@ class AppColors {
   static const Color secondaryText = Color(0xFFB8C5D6);
   static const Color tertiaryText = Color(0xFF8892A6);
 
+  // Status colors
+  static const Color successGreen = Color(0xFF4CAF50);
+
   static const LinearGradient backgroundGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

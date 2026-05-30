@@ -2,14 +2,78 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:portfolio_website/utils/extension.dart';
 import 'package:portfolio_website/widgets/animated_section.dart';
+import '../services/contact_service.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constant.dart';
 import '../utils/app_styles.dart';
 import '../utils/responsive.dart';
 import '../utils/url_launcher_helper.dart';
 
-class ContactSection extends StatelessWidget {
+class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
+
+  @override
+  State<ContactSection> createState() => _ContactSectionState();
+}
+
+class _ContactSectionState extends State<ContactSection> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _messageController = TextEditingController();
+  bool _isSubmitting = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submitForm() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    setState(() => _isSubmitting = true);
+
+    try {
+      await ContactService.sendEmail(
+        name: _nameController.text.trim(),
+        email: _emailController.text.trim(),
+        message: _messageController.text.trim(),
+      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Message sent successfully!'),
+            backgroundColor: AppColors.primaryAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        _formKey.currentState!.reset();
+        _nameController.clear();
+        _emailController.clear();
+        _messageController.clear();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to send message: $e'),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSubmitting = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +199,126 @@ class ContactSection extends StatelessWidget {
                     ],
                   ),
                 ),
-                80.height,
+                48.height,
+
+                // Contact Form
+                AnimatedSection(
+                  delay: const Duration(milliseconds: 300),
+                  child: Container(
+                    padding: EdgeInsets.all(
+                      Responsive.value(
+                        context,
+                        mobile: 24.0,
+                        desktop: 32.0,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.cardBackground,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.secondaryBackground,
+                        width: 1,
+                      ),
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Send me a message',
+                            style: AppTextStyles.heading3.copyWith(
+                              fontSize: 20,
+                            ),
+                          ),
+                          24.height,
+                          _buildTextField(
+                            controller: _nameController,
+                            label: 'Name',
+                            hint: 'Your name',
+                            icon: Icons.person_outline,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
+                            },
+                          ),
+                          16.height,
+                          _buildTextField(
+                            controller: _emailController,
+                            label: 'Email',
+                            hint: 'your.email@example.com',
+                            icon: Icons.email_outlined,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              if (!value.contains('@')) {
+                                return 'Please enter a valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                          16.height,
+                          _buildTextField(
+                            controller: _messageController,
+                            label: 'Message',
+                            hint: 'Your message...',
+                            icon: Icons.message_outlined,
+                            maxLines: 5,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your message';
+                              }
+                              if (value.trim().length < 10) {
+                                return 'Message must be at least 10 characters';
+                              }
+                              return null;
+                            },
+                          ),
+                          24.height,
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: _isSubmitting ? null : _submitForm,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primaryAccent,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: _isSubmitting
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Send Message',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                48.height,
 
                 // Footer
                 Container(
@@ -323,6 +506,146 @@ class ContactSection extends StatelessWidget {
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required IconData icon,
+    int maxLines = 1,
+    TextInputType? keyboardType,
+    String? Function(String?)? validator,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: AppTextStyles.body2.copyWith(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primaryText,
+          ),
+        ),
+        8.height,
+        maxLines > 1
+            ? Container(
+                decoration: BoxDecoration(
+                  color: AppColors.secondaryBackground,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16, right: 12, top: 16),
+                      child: Icon(
+                        icon,
+                        color: AppColors.primaryAccent,
+                        size: 20,
+                      ),
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        controller: controller,
+                        maxLines: maxLines,
+                        keyboardType: keyboardType,
+                        validator: validator,
+                        textAlignVertical: TextAlignVertical.top,
+                        style: AppTextStyles.body1.copyWith(
+                          color: AppColors.primaryText,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: hint,
+                          hintStyle: AppTextStyles.body2.copyWith(
+                            color: AppColors.tertiaryText,
+                          ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          contentPadding: const EdgeInsets.only(
+                            right: 16,
+                            top: 16,
+                            bottom: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : TextFormField(
+                controller: controller,
+                maxLines: maxLines,
+                keyboardType: keyboardType,
+                validator: validator,
+                textAlignVertical: TextAlignVertical.center,
+                style: AppTextStyles.body1.copyWith(
+                  color: AppColors.primaryText,
+                ),
+                decoration: InputDecoration(
+                  hintText: hint,
+                  hintStyle: AppTextStyles.body2.copyWith(
+                    color: AppColors.tertiaryText,
+                  ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 12),
+                    child: Icon(
+                      icon,
+                      color: AppColors.primaryAccent,
+                      size: 20,
+                    ),
+                  ),
+                  prefixIconConstraints: const BoxConstraints(
+                    minWidth: 48,
+                    minHeight: 48,
+                  ),
+                  isDense: true,
+                  filled: true,
+                  fillColor: AppColors.secondaryBackground,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: AppColors.primaryAccent,
+                      width: 2,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2,
+                    ),
+                  ),
+                  contentPadding: const EdgeInsets.only(
+                    left: 0,
+                    right: 16,
+                    top: 12,
+                    bottom: 12,
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }

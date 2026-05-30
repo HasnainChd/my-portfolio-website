@@ -108,7 +108,7 @@ class AboutSection extends StatelessWidget {
                       _buildStatCard(
                         context,
                         icon: Icons.work_outline_rounded,
-                        value: '2',
+                        value: '5+',
                         label: 'Projects Delivered',
                       ),
                       _buildStatCard(
