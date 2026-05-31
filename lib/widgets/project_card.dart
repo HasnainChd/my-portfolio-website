@@ -49,8 +49,8 @@ class _ProjectCardState extends State<ProjectCard> {
             width: Responsive.value(
               context,
               mobile: double.infinity,
-              tablet: 380.0,
-              desktop: 400.0,
+              tablet: 350.0,
+              desktop: 380.0,
             ),
             decoration: BoxDecoration(
               color: AppColors.cardBackground,

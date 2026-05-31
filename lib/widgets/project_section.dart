@@ -95,12 +95,12 @@ class ProjectsSection extends StatelessWidget {
                 spacing: Responsive.value(
                   context,
                   mobile: 20.0,
-                  desktop: 32.0,
+                  desktop: 24.0,
                 ),
                 runSpacing: Responsive.value(
                   context,
                   mobile: 20.0,
-                  desktop: 32.0,
+                  desktop: 24.0,
                 ),
                 alignment: WrapAlignment.center,
                 children: AppData.projects.asMap().entries.map((entry) {
