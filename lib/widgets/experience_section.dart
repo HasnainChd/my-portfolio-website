@@ -14,7 +14,7 @@ class ExperienceSection extends StatelessWidget {
     _ExperienceEntry(
       role: 'Flutter Developer Intern',
       company: 'Nextpak Agile Solutions',
-      period: 'Feb 2025 – Aug 2025',
+      period: 'Feb 2025 – Jul 2025',
       descriptions: [
         'Learned Flutter development in a professional environment',
         'Assisted in building UI components and screens',
