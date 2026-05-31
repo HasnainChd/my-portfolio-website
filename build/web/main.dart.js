@@ -80910,7 +80910,7 @@ l(){var s=this.e
 s===$&&A.a()
 s.l()
 this.av()},
-H(a0){var s,r,q,p,o,n,m,l,k,j,i,h=this,g=null,f=A.b8(a0,400,1/0,380),e=A.aS(20),d=A.de(h.d?B.r.bI(0.5):B.aV,1),c=h.d?A.b([new A.cR(0,B.bt,B.r.bI(0.2),B.JT,30)],t.R):g,b=A.b8(a0,320,220,g),a=h.a.c.x.length
+H(a0){var s,r,q,p,o,n,m,l,k,j,i,h=this,g=null,f=A.b8(a0,380,1/0,350),e=A.aS(20),d=A.de(h.d?B.r.bI(0.5):B.aV,1),c=h.d?A.b([new A.cR(0,B.bt,B.r.bI(0.2),B.JT,30)],t.R):g,b=A.b8(a0,320,220,g),a=h.a.c.x.length
 if(a!==0){s=h.e
 s===$&&A.a()
 a=A.b([A.awc(s,new A.akt(h),a,new A.aku(h))],t.p)
@@ -81170,8 +81170,8 @@ p=A.b8(a,700,1/0,n)
 o=t.p
 p=A.j4(A.cw(A.b([k,j,i,s,r,q,A.az(A.at("Here are some of my recent projects that showcase my skills and experience",n,n,n,A.aJ().$5$color$fontSize$fontWeight$height$letterSpacing(B.x,18,B.l,1.6,0.2).ia(B.x,A.b8(a,18,16,n)),B.aw,n),n,p)],o),B.y,B.w,B.A),B.v)
 q=A.az(n,60,n)
-r=A.b8(a,32,20,n)
-s=A.b8(a,32,20,n)
+r=A.b8(a,24,20,n)
+s=A.b8(a,24,20,n)
 i=new A.oV(B.Gz,t.Ru)
 return A.aK(n,A.dQ(new A.e9(B.l3,A.cw(A.b([p,q,A.n4(B.f6,i.ger(i).fV(0,new A.a8U(),t.iK).f9(0),s,r)],o),B.y,B.w,B.A),n),n,n),B.m,n,n,n,n,n,n,n,new A.a1(m,l,m,l),n,n,1/0)}}
 A.a8U.prototype={
