@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:portfolio_website/screens/home_screen.dart';
-import 'package:portfolio_website/utils/app_colors.dart';
+import 'package:portfolio_website/core/theme/theme_provider.dart';
 
 void main() {
   runApp(const PortfolioApp());
@@ -12,20 +12,20 @@ class PortfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'My Portfolio',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: AppColors.primaryBackground,
-          textTheme: GoogleFonts.poppinsTextTheme(
-            ThemeData(brightness: Brightness.dark).textTheme,
-          ).apply(
-            bodyColor: AppColors.secondaryText,
-            displayColor: AppColors.primaryText,
-          ),
-        ),
-        home: HomeScreen());
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Muhammad Hasnain | Flutter Developer',
+            debugShowCheckedModeBanner: false,
+            theme: themeProvider.lightTheme,
+            darkTheme: themeProvider.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const HomeScreen(),
+          );
+        },
+      ),
+    );
   }
 }
