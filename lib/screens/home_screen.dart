@@ -8,7 +8,11 @@ import '../widgets/project_section.dart';
 import '../widgets/skill_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/experience_section.dart';
+import '../widgets/services_section.dart';
+import '../widgets/achievements_section.dart';
+import '../widgets/footer_section.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/scroll_to_top_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,10 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer? _scrollDownTimer;
   Timer? _scrollUpTimer;
 
-  final List<GlobalKey> _sectionKeys = List.generate(
-    6,
-    (index) => GlobalKey(),
-  );
+  final List<GlobalKey> _sectionKeys = List.generate(9, (index) => GlobalKey());
 
   @override
   void initState() {
@@ -49,9 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final maxScroll = _scrollController.position.maxScrollExtent;
       final newOffset = (_scrollController.offset + 20).clamp(0.0, maxScroll);
       _scrollController.jumpTo(newOffset);
-      if (newOffset >= maxScroll) {
-        timer.cancel();
-      }
+      if (newOffset >= maxScroll) timer.cancel();
     });
   }
 
@@ -61,9 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final newOffset = (_scrollController.offset - 20)
           .clamp(0.0, _scrollController.position.maxScrollExtent);
       _scrollController.jumpTo(newOffset);
-      if (newOffset <= 0) {
-        timer.cancel();
-      }
+      if (newOffset <= 0) timer.cancel();
     });
   }
 
@@ -74,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onScroll() {
     final screenHeight = MediaQuery.of(context).size.height;
-
     for (int i = _sectionKeys.length - 1; i >= 0; i--) {
       final RenderBox? box =
           _sectionKeys[i].currentContext?.findRenderObject() as RenderBox?;
@@ -82,11 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
         final position = box
             .localToGlobal(Offset.zero, ancestor: context.findRenderObject())
             .dy;
-
         if (position <= screenHeight / 2) {
-          if (_currentSection != i) {
-            setState(() => _currentSection = i);
-          }
+          if (_currentSection != i) setState(() => _currentSection = i);
           break;
         }
       }
@@ -96,12 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollToSection(int index) {
     final RenderBox? box =
         _sectionKeys[index].currentContext?.findRenderObject() as RenderBox?;
-
     if (box != null) {
       final position = box.localToGlobal(Offset.zero).dy;
-      final currentScroll = _scrollController.offset;
-      final targetScroll = currentScroll + position - 80;
-
+      final targetScroll = (_scrollController.offset + position - 80)
+          .clamp(0.0, _scrollController.position.maxScrollExtent);
       _scrollController.animateTo(
         targetScroll,
         duration: const Duration(milliseconds: 800),
@@ -110,17 +101,19 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _buildDivider() {
+  Widget _buildDivider(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       height: 1,
-      margin: const EdgeInsets.symmetric(vertical: 0),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
             Colors.transparent,
-            AppColors.secondaryAccent.withValues(alpha: 0.3),
+            isDark
+                ? AppColors.primaryAccent.withValues(alpha: 0.2)
+                : AppColors.primaryAccent.withValues(alpha: 0.15),
             Colors.transparent,
           ],
         ),
@@ -130,7 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: AppColors.background(context),
       body: Focus(
         autofocus: true,
         onKeyEvent: (node, event) {
@@ -156,57 +152,74 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: AppColors.backgroundGradient,
-              ),
-              child: ScrollConfiguration(
-                behavior: ScrollConfiguration.of(context).copyWith(
-                  physics: const BouncingScrollPhysics(),
-                ),
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 80),
-                      Container(
-                        key: _sectionKeys[0],
-                        child: HeroSection(
-                          onViewProjectsTap: () => _scrollToSection(4),
-                          onContactTap: () => _scrollToSection(5),
+            // ── Background ──────────────────────────────────────────────────
+            Positioned.fill(
+              child: isDark
+                  ? Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF0B0F1A),
+                            Color(0xFF0E1420),
+                            Color(0xFF0B0F1A),
+                          ],
                         ),
                       ),
-                      _buildDivider(),
-                      Container(
-                        key: _sectionKeys[1],
-                        child: const AboutSection(),
+                    )
+                  : Container(color: AppColors.lightBackground),
+            ),
+
+            // ── Scrollable content ───────────────────────────────────────────
+            ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(
+                physics: const BouncingScrollPhysics(),
+              ),
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                padding: const EdgeInsets.only(right: 16),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 80),
+                    Container(
+                      key: _sectionKeys[0],
+                      child: HeroSection(
+                        onViewProjectsTap: () => _scrollToSection(6),
+                        onContactTap: () => _scrollToSection(7),
                       ),
-                      _buildDivider(),
-                      Container(
-                        key: _sectionKeys[2],
-                        child: const ExperienceSection(),
-                      ),
-                      _buildDivider(),
-                      Container(
-                        key: _sectionKeys[3],
-                        child: const SkillsSection(),
-                      ),
-                      _buildDivider(),
-                      Container(
-                        key: _sectionKeys[4],
-                        child: const ProjectsSection(),
-                      ),
-                      _buildDivider(),
-                      Container(
+                    ),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[1], child: const AboutSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[2], child: const ExperienceSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[3], child: const SkillsSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[4], child: const ServicesSection()),
+                    _buildDivider(context),
+                    Container(
                         key: _sectionKeys[5],
-                        child: const ContactSection(),
-                      ),
-                    ],
-                  ),
+                        child: const AchievementsSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[6], child: const ProjectsSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[7], child: const ContactSection()),
+                    _buildDivider(context),
+                    Container(
+                        key: _sectionKeys[8], child: const FooterSection()),
+                  ],
                 ),
               ),
             ),
+
+            // ── Sticky navbar ────────────────────────────────────────────────
             Positioned(
               top: 0,
               left: 0,
@@ -215,6 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 currentIndex: _currentSection,
                 onNavItemTapped: _scrollToSection,
               ),
+            ),
+
+            // ── Scroll-to-top button ─────────────────────────────────────────
+            Positioned(
+              bottom: 32,
+              right: 32,
+              child: ScrollToTopButton(scrollController: _scrollController),
             ),
           ],
         ),
