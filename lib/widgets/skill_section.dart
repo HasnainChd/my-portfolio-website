@@ -283,16 +283,20 @@ class _SkillCategoryBlock extends StatelessWidget {
 
   IconData _categoryIcon(String title) {
     final t = title.toLowerCase();
-    if (t.contains('mobile') || t.contains('flutter'))
+    if (t.contains('mobile') || t.contains('flutter')) {
       return Icons.phone_iphone_rounded;
+    }
     if (t.contains('backend') || t.contains('api')) return Icons.dns_rounded;
     if (t.contains('database')) return Icons.storage_rounded;
-    if (t.contains('state') || t.contains('architect'))
+    if (t.contains('state') || t.contains('architect')) {
       return Icons.account_tree_outlined;
-    if (t.contains('test') || t.contains('quality'))
+    }
+    if (t.contains('test') || t.contains('quality')) {
       return Icons.bug_report_outlined;
-    if (t.contains('deploy') || t.contains('tool'))
+    }
+    if (t.contains('deploy') || t.contains('tool')) {
       return Icons.rocket_launch_outlined;
+    }
     return Icons.code_rounded;
   }
 }

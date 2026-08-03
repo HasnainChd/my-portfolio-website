@@ -48,6 +48,68 @@ class AppData {
 
   static const List<Project> projects = [
     Project(
+      title: 'Equally',
+      description:
+          'A smart bill-splitting & group expense tracking app built to settle expenses easily among friends and roommates.',
+      tagline: 'Split bills & expenses effortlessly with friends',
+      technologies: [
+        'Flutter',
+        'Dart',
+        'Supabase',
+        'Riverpod',
+        'ML Kit',
+      ],
+      screenshotPaths: [
+        'assets/images/projects/equally/screen1.png',
+        'assets/images/projects/equally/screen2.png',
+        'assets/images/projects/equally/screen3.png',
+        'assets/images/projects/equally/screen4.png',
+        'assets/images/projects/equally/screen5.png',
+        'assets/images/projects/equally/screen6.png',
+      ],
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=com.devorastudios.equally&pcampaignid=web_share',
+      githubUrl: null,
+      keyFeatures: [
+        'Group creation and seamless bill expense splitting',
+        'Smart OCR receipt scanning with Google ML Kit',
+        'Real-time balance tracking and settlement calculations',
+        'PDF expense report generation & export',
+        'Deep link join flows for easy group invites',
+        'Flutter UI with Supabase backend and Riverpod state management',
+      ],
+    ),
+    Project(
+      title: 'StudyCoach AI',
+      description:
+          'An AI-powered study companion designed to optimize student learning with personalized coaching and study tools.',
+      tagline: 'Your AI-powered personal study tutor & learning assistant',
+      technologies: [
+        'Flutter',
+        'Dart',
+        'AI / LLM',
+        'REST APIs',
+        'Provider',
+      ],
+      screenshotPaths: [
+        'assets/images/projects/studycoach/screen1.png',
+        'assets/images/projects/studycoach/screen2.png',
+        'assets/images/projects/studycoach/screen3.png',
+        'assets/images/projects/studycoach/screen4.png',
+        'assets/images/projects/studycoach/screen5.png',
+      ],
+      playStoreUrl:
+          'https://play.google.com/store/apps/details?id=com.devorastudios.studycoach&pcampaignid=web_share',
+      githubUrl: null,
+      keyFeatures: [
+        'AI-driven personalized study coaching & learning plans',
+        'Interactive topic breakdown and study quizzes',
+        'Smart flashcard and note summary generation',
+        'Progress tracking and performance analytics',
+        'Built with Flutter, AI/LLM integration, and REST APIs',
+      ],
+    ),
+    Project(
       title: 'Tealpot',
       description:
           'A platform connecting businesses with vetted blue-collar professionals on demand, built with Flutter.',
