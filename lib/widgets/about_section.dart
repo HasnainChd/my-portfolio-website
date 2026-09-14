@@ -124,7 +124,7 @@ class AboutSection extends StatelessWidget {
 
           // Bio
           Text(
-            "I'm a Flutter Developer with 1.5+ years of professional experience building "
+            "I'm a Flutter Developer with 2+ years of professional experience building "
             "cross-platform mobile applications. Previously at Nextpak Agile Solutions, Rawalpindi, "
             "I contributed to real-world projects — building responsive UIs, integrating "
             "REST APIs, working with Firebase & Supabase, and delivering apps on time.",
@@ -292,7 +292,7 @@ class AboutSection extends StatelessWidget {
 
   Widget _buildStatsGrid(BuildContext context, bool isDark) {
     final stats = [
-      (Icons.code_rounded, '1.5+', 'Years Experience'),
+      (Icons.code_rounded, '2+', 'Years Experience'),
       (Icons.work_outline_rounded, '5+', 'Projects Delivered'),
       (Icons.emoji_events_outlined, '10+', 'Technologies Mastered'),
       (Icons.star_outline_rounded, '100%', 'Client Satisfaction'),
