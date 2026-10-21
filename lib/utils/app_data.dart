@@ -97,6 +97,7 @@ class AppData {
         'assets/images/projects/studycoach/screen3.png',
         'assets/images/projects/studycoach/screen4.png',
         'assets/images/projects/studycoach/screen5.png',
+        'assets/images/projects/studycoach/screen6.png',
       ],
       playStoreUrl:
           'https://play.google.com/store/apps/details?id=com.devorastudios.studycoach&pcampaignid=web_share',
