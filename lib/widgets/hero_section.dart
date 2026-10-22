@@ -415,7 +415,7 @@ class HeroSection extends StatelessWidget {
             _buildSocialIcon(
               icon: Icons.terminal_rounded,
               tooltip: 'GitHub',
-              url: 'https://github.com/Muhammad-Hasnain67',
+              url: 'https://github.com/HasnainChd',
               isDark: isDark,
             ),
             _buildSocialIcon(

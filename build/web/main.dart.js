@@ -1049,7 +1049,7 @@ s.a_N()
 return s},
 aHk(a){return new A.a1t($.at,a)},
 as5(){var s,r,q,p,o,n=A.aGW(self.window.navigator)
-if(n==null||n.length===0)return B.nz
+if(n==null||n.length===0)return B.nA
 s=A.a([],t.ss)
 for(r=n.length,q=0;q<n.length;n.length===r||(0,A.N)(n),++q){p=n[q]
 o=p.split("-")
@@ -6258,7 +6258,7 @@ atI(a,b,c){var s,r,q
 if(b===c)return""
 if(!A.aA1(a.charCodeAt(b)))A.vu(a,b,"Scheme not starting with alphabetic character")
 for(s=b,r=!1;s<c;++s){q=a.charCodeAt(s)
-if(!(q<128&&(B.ny[q>>>4]&1<<(q&15))!==0))A.vu(a,s,"Illegal scheme character")
+if(!(q<128&&(B.nz[q>>>4]&1<<(q&15))!==0))A.vu(a,s,"Illegal scheme character")
 if(65<=q&&q<=90)r=!0}a=B.c.T(a,b,c)
 return A.aMM(r?a.toLowerCase():a)},
 aMM(a){if(a==="http")return"http"
@@ -6270,7 +6270,7 @@ aA6(a,b,c){if(a==null)return""
 return A.Fs(a,b,c,B.Ge,!1,!1)},
 aA4(a,b,c,d,e,f){var s,r=e==="file",q=r||f
 if(a==null)return r?"/":""
-else s=A.Fs(a,b,c,B.nA,!0,!0)
+else s=A.Fs(a,b,c,B.nB,!0,!0)
 if(s.length===0){if(r)return"/"}else if(q&&!B.c.bW(s,"/"))s="/"+s
 return A.aMU(s,e,f)},
 aMU(a,b,c){var s=b.length===0
@@ -6361,7 +6361,7 @@ return B.b.bN(s,"/")},
 aA0(a){var s,r,q=a.length
 if(q>=2&&A.aA1(a.charCodeAt(0)))for(s=1;s<q;++s){r=a.charCodeAt(s)
 if(r===58)return B.c.T(a,0,s)+"%3A"+B.c.cg(a,s+1)
-if(r>127||(B.ny[r>>>4]&1<<(r&15))===0)break}return a},
+if(r>127||(B.nz[r>>>4]&1<<(r&15))===0)break}return a},
 aMW(a,b){if(a.ajh("package")&&a.c==null)return A.aB0(b,0,b.length)
 return-1},
 aMQ(){return A.a([],t.s)},
@@ -18103,7 +18103,7 @@ r.toString
 A.fk(r)
 q=a.i(0,"swipeEdge")
 q.toString
-return new A.Lb(s,r,B.Hp[A.cD(q)])},
+return new A.Lb(s,r,B.Hq[A.cD(q)])},
 B8:function B8(a,b){this.a=a
 this.b=b},
 Lb:function Lb(a,b,c){this.a=a
@@ -28108,7 +28108,7 @@ l.push(new A.eQ(n[0],n[1],n[2],n[3],B.jl[m]))}return l},
 d3(a){var s,r=this.a
 r===$&&A.b()
 r=r.a.getGlyphPositionAtCoordinate(a.a,a.b)
-s=B.Hr[B.d.ai(r.affinity.value)]
+s=B.Hs[B.d.ai(r.affinity.value)]
 return new A.ai(B.d.ai(r.pos),s)},
 Vl(a){var s=this.a
 s===$&&A.b()
@@ -37530,7 +37530,7 @@ r=B.c.j6(m,"?",s)
 q=m.length
 if(r>=0){p=A.Fs(m,r+1,q,B.hj,!1,!1)
 q=r}else p=n
-m=o.c=new A.PS("data","",n,n,A.Fs(m,s,q,B.nA,!1,!1),p,n)}return m},
+m=o.c=new A.PS("data","",n,n,A.Fs(m,s,q,B.nB,!1,!1),p,n)}return m},
 k(a){var s=this.a
 return this.b[0]===-1?"data:"+s:s}}
 A.apE.prototype={
@@ -43781,7 +43781,7 @@ n=o.e
 o=o.cx
 r=q.ga8_()
 q.a.toString
-return new A.BT(p,p,p,new A.akF(),p,p,p,p,p,n,B.JY,p,p,p,B.HQ,q.ga85(),o,p,B.RJ,s,p,r,p,p,B.nz,!1,!1,p,p,p,new A.oS(q,t.bT))},
+return new A.BT(p,p,p,new A.akF(),p,p,p,p,p,n,B.JY,p,p,p,B.HQ,q.ga85(),o,p,B.RJ,s,p,r,p,p,B.nA,!1,!1,p,p,p,new A.oS(q,t.bT))},
 H(a){var s,r=null,q=A.mf(!1,!1,this.a1c(a),r,r,r,r,!0,r,r,r,new A.akG(),r,r)
 this.a.toString
 s=this.d
@@ -80831,13 +80831,13 @@ k=A.ab(A.ez(B.b5,A.a([A.am(o,A.dc(A.aa("MH",o,o,o,A.cA().$3$color$fontSize$fontW
 s=A.ab(o,24,o)
 r=A.aa("About Me",o,o,o,A.cA().$3$color$fontSize$fontWeight(A.Q(a).ax.a===B.t?B.a1:B.a2,32,B.a3),o,o)
 q=A.ab(o,16,o)
-return A.am(o,A.bF(A.a([k,s,r,q,A.aa("I'm a Flutter Developer with 1.5+ years of professional experience building cross-platform mobile applications. Previously at Nextpak Agile Solutions, Rawalpindi, I contributed to real-world projects \u2014 building responsive UIs, integrating REST APIs, working with Firebase & Supabase, and delivering apps on time.",o,o,o,A.b2().$4$color$fontSize$fontWeight$height(A.Q(a).ax.a===B.t?B.I:B.J,15,B.q,1.7),o,o),A.ab(o,28,o),p.vg(a,B.nd,"Rawalpindi, Pakistan"),A.ab(o,12,o),p.vg(a,B.ne,"naindev309@gmail.com"),A.ab(o,12,o),p.vg(a,B.jf,"Available for freelance"),A.ab(o,12,o),p.vg(a,B.F3,"English, Urdu")],j),B.S,B.o,B.u),B.k,o,o,new A.aq(n,o,l,m,o,o,B.p),o,o,o,o,B.mC,o,o,o)},
+return A.am(o,A.bF(A.a([k,s,r,q,A.aa("I'm a Flutter Developer with 2+ years of professional experience building cross-platform mobile applications. Previously at Nextpak Agile Solutions, Rawalpindi, I contributed to real-world projects \u2014 building responsive UIs, integrating REST APIs, working with Firebase & Supabase, and delivering apps on time.",o,o,o,A.b2().$4$color$fontSize$fontWeight$height(A.Q(a).ax.a===B.t?B.I:B.J,15,B.q,1.7),o,o),A.ab(o,28,o),p.vg(a,B.nd,"Rawalpindi, Pakistan"),A.ab(o,12,o),p.vg(a,B.ne,"naindev309@gmail.com"),A.ab(o,12,o),p.vg(a,B.jf,"Available for freelance"),A.ab(o,12,o),p.vg(a,B.F3,"English, Urdu")],j),B.S,B.o,B.u),B.k,o,o,new A.aq(n,o,l,m,o,o,B.p),o,o,o,o,B.mC,o,o,o)},
 vg(a,b,c){var s=null,r=B.l.az(0.1),q=A.aP(8)
 q=A.am(s,A.d3(b,B.l,s,16),B.k,s,s,new A.aq(r,s,s,q,s,s,B.p),s,32,s,s,s,s,s,32)
 return A.c1(A.a([q,B.bV,A.ek(A.aa(c,s,s,s,A.b2().$3$color$fontSize$fontWeight(A.Q(a).ax.a===B.t?B.I:B.J,14,B.E),s,s),1,s)],t.p),B.y,B.o,B.u)},
 JE(a,b){var s=null,r=A.aa("At a Glance",s,s,s,A.cA().$3$color$fontSize$fontWeight(A.Q(a).ax.a===B.t?B.a1:B.a2,28,B.a3),s,s),q=A.ab(s,8,s)
 return A.bF(A.a([r,q,A.aa("Numbers that reflect my journey",s,s,s,A.b2().$2$color$fontSize(A.Q(a).ax.a===B.t?B.I:B.J,15),s,s),A.ab(s,32,s),this.a14(a,b),A.ab(s,48,s),this.a11(a)],t.p),B.S,B.o,B.u)},
-a14(a,b){return new A.K0(new A.Y3(this,A.a([B.Mw,B.Mz,B.MB,B.Mx],t.UT),b),null)},
+a14(a,b){return new A.K0(new A.Y3(this,A.a([B.Mx,B.Mz,B.MB,B.Mw],t.UT),b),null)},
 a13(a,b,c,d,e,f){var s,r,q=null,p=A.Q(a).ax.a===B.t?B.ap:B.i,o=A.aP(16),n=A.c_(A.Q(a).ax.a===B.t?B.aq:B.ao,1),m=B.l.az(0.1),l=A.aP(10)
 l=A.am(q,A.d3(b,B.l,q,18),B.k,q,q,new A.aq(m,q,q,l,q,q,B.p),q,36,q,q,q,q,q,36)
 m=A.ab(q,20,q)
@@ -81039,7 +81039,7 @@ p=A.aa("I'm currently open to new opportunities and collaborations. Whether you 
 o=A.ab(a4,48,a4)
 n=A.ba(b1,24,16,a4)
 m=t.p
-n=A.fY(A.jV(B.dY,A.a([new A.qq(B.nc,"Email","naindev309@gmail.com",new A.ahZ(a3,b1,a5),a5,a4),new A.qq(B.hd,"GitHub","@Muhammad-Hasnain67",new A.ai_(),a5,a4),new A.qq(B.jf,"LinkedIn","muhammad-hasnain309",new A.ai0(),a5,a4)],m),16,n),B.N)
+n=A.fY(A.jV(B.dY,A.a([new A.qq(B.nc,"Email","naindev309@gmail.com",new A.ahZ(a3,b1,a5),a5,a4),new A.qq(B.hd,"GitHub","@HasnainChd",new A.ai_(),a5,a4),new A.qq(B.jf,"LinkedIn","muhammad-hasnain309",new A.ai0(),a5,a4)],m),16,n),B.N)
 l=A.ab(a4,48,a4)
 k=A.ba(b1,32,24,a4)
 j=a5?B.ap:B.i
@@ -81097,7 +81097,7 @@ $0(){var s=0,r=A.L(t.H),q=1,p,o,n,m
 var $async$$0=A.M(function(a,b){if(a===1){p=b
 s=q}while(true)switch(s){case 0:q=3
 s=6
-return A.O(A.afA("Muhammad-Hasnain67"),$async$$0)
+return A.O(A.afA("HasnainChd"),$async$$0)
 case 6:q=1
 s=5
 break
@@ -81357,7 +81357,7 @@ l=A.aP(999)
 l=A.tN(A.md(A.je(A.jV(o,A.a([m,A.am(j,A.jB(B.N,j,A.hL(!1,A.aP(999),!0,new A.bx(B.mB,A.aa("Contact Me",j,j,j,A.b2().$4$color$fontSize$fontWeight$letterSpacing(B.l,16,B.R,0.5),j,j),j),j,!0,j,j,j,j,j,j,j,j,j,k.d,j,j,j,j),B.k,B.H,0,j,j,j,j,j,B.cc),B.k,j,j,new A.aq(j,j,n,l,j,j,B.p),j,j,j,j,j,j,j,j)],a0),16,16),j),B.aT,A.b8(22e4,0),A.b8(h,0)),0.1,B.bi,A.b8(22e4,0),A.b8(h,0),0)
 n=A.ab(j,32,j)
 o=g?B.dY:B.bp
-return A.bF(A.a([d,c,b,a,s,r,q,p,l,n,A.tN(A.md(A.je(A.jV(o,A.a([k.AV(B.Fd,f,"GitHub","https://github.com/Muhammad-Hasnain67"),k.AV(B.EH,f,"LinkedIn","https://linkedin.com/in/muhammad-hasnain309"),k.AV(B.ne,f,"Email","mailto:naindev309@gmail.com")],a0),0,12),j),B.aT,A.b8(26e4,0),A.b8(h,0)),0.1,B.bi,A.b8(26e4,0),A.b8(h,0),0)],a0),e,B.bJ,B.u)},
+return A.bF(A.a([d,c,b,a,s,r,q,p,l,n,A.tN(A.md(A.je(A.jV(o,A.a([k.AV(B.Fd,f,"GitHub","https://github.com/HasnainChd"),k.AV(B.EH,f,"LinkedIn","https://linkedin.com/in/muhammad-hasnain309"),k.AV(B.ne,f,"Email","mailto:naindev309@gmail.com")],a0),0,12),j),B.aT,A.b8(26e4,0),A.b8(h,0)),0.1,B.bi,A.b8(26e4,0),A.b8(h,0),0)],a0),e,B.bJ,B.u)},
 JC(a){var s=null,r=A.ba(a,320,240,280),q=A.c_(B.l.az(0.25),2)
 return A.ez(B.a6,A.a([new A.DT(r,s),A.ayp(A.md(A.je(A.am(s,new A.HL(A.asn("assets/images/profile/avatar.png",new A.a3u(r),B.An,1/0,1/0),s),B.k,s,s,new A.aq(s,s,q,s,s,s,B.bh),s,r,s,s,s,s,s,r),s),B.aT,A.b8(18e4,0),A.b8(65e4,0)),B.tU,B.bi,A.b8(18e4,0),A.b8(65e4,0),B.tT)],t.p),B.C,B.aQ)},
 AV(a,b,c,d){var s=null
@@ -81924,14 +81924,14 @@ o=A.ab(m,60,m)
 return A.am(m,A.dc(new A.dF(B.ln,A.bF(A.a([p,o,k.a.a>=1024?this.a0R(a,l):this.a0V(a,l)],n),B.y,B.o,B.u),m),m,m),B.k,j,m,m,m,m,m,m,new A.a3(i,h,i,h),m,m,1/0)},
 a0R(a,b){var s,r,q,p,o,n,m,l=null,k=t.p,j=A.a([],k)
 for(s=0;s<5;s=r){r=s+3
-q=B.b.cc(B.nB,s,B.j.eN(r,0,5))
+q=B.b.cc(B.ny,s,B.j.eN(r,0,5))
 p=A.b8(0,150*B.j.eq(s,3))
 o=A.a([],k)
 for(n=0;n<3;++n){m=A.a([],k)
 if(n>0)m.push(B.yH)
 m.push(new A.iw(1,B.ez,n<q.length?new A.tk(q[n],b,l):B.aC,l))
 B.b.M(o,m)}j.push(new A.eF(new A.bx(B.j5,A.c1(o,B.S,B.o,B.u),l),p,l))}return A.bF(j,B.y,B.o,B.u)},
-a0V(a,b){var s=new A.iD(B.nB,t.Ru)
+a0V(a,b){var s=new A.iD(B.ny,t.Ru)
 return A.bF(s.ge1(s).fa(0,new A.aa_(b),t.iK).ej(0),B.y,B.o,B.u)}}
 A.aa_.prototype={
 $1(a){return A.fY(new A.bx(B.mu,new A.tk(a.b,this.a,null),null),A.b8(0,150*a.a))},
@@ -86062,8 +86062,8 @@ B.Al=new A.aq(null,null,null,null,null,B.G6,B.p)
 B.C2=new A.x(0.23529411764705882,0,0,0,B.e)
 B.jN=new A.i(0,4)
 B.Ar=new A.cN(0.5,B.br,B.C2,B.jN,10)
-B.Hq=A.a(s([B.Ar]),t.E)
-B.Am=new A.aq(null,null,null,B.li,B.Hq,null,B.p)
+B.Hr=A.a(s([B.Ar]),t.E)
+B.Am=new A.aq(null,null,null,B.li,B.Hr,null,B.p)
 B.fC=new A.x(1,0.2980392156862745,0.6862745098039216,0.3137254901960784,B.e)
 B.bh=new A.Ho(1,"circle")
 B.lp=new A.aq(B.fC,null,null,null,null,null,B.bh)
@@ -86873,8 +86873,8 @@ B.nu=new A.yD(3,"endOfText")
 B.CH=new A.x(1,0.10196078431372549,0.10196078431372549,0.1803921568627451,B.e)
 B.BI=new A.x(1,0.08627450980392157,0.12941176470588237,0.24313725490196078,B.e)
 B.BM=new A.x(1,0.058823529411764705,0.20392156862745098,0.3764705882352941,B.e)
-B.Ht=A.a(s([B.CH,B.BI,B.BM]),t.O)
-B.G7=new A.hd(B.c1,B.fo,B.bg,B.Ht,null,null)
+B.Hu=A.a(s([B.CH,B.BI,B.BM]),t.O)
+B.G7=new A.hd(B.c1,B.fo,B.bg,B.Hu,null,null)
 B.Gb=A.a(s([B.l,B.cO]),t.O)
 B.aM=new A.hd(B.e4,B.e3,B.bg,B.Gb,null,null)
 B.Co=new A.x(1,0.058823529411764705,0.12549019607843137,0.15294117647058825,B.e)
@@ -86930,32 +86930,32 @@ B.H2=A.a(s(["Developed and maintained cross-platform mobile apps","Worked on Tea
 B.We=new A.CV("Flutter Developer","Aug 2025 \u2013 May 2026","Full-time",B.H2)
 B.H4=A.a(s([B.Wd,B.We]),A.aw("A<CV>"))
 B.H7=A.a(s([B.ir,B.is]),A.aw("A<wg>"))
-B.ny=A.a(s([0,0,26624,1023,65534,2047,65534,2047]),t.t)
-B.eF=A.a(s([B.cH,B.cm,B.fr,B.fs,B.iq]),t.QP)
-B.Ik=new A.jA("en","US")
-B.nz=A.a(s([B.Ik]),t.ss)
-B.nA=A.a(s([0,0,65490,12287,65535,34815,65534,18431]),t.t)
-B.Hx=A.a(s(["Flutter","Dart","Supabase","Riverpod","ML Kit"]),t.s)
+B.Hy=A.a(s(["Flutter","Dart","Supabase","Riverpod","ML Kit"]),t.s)
 B.Ia=A.a(s(["assets/images/projects/equally/screen1.png","assets/images/projects/equally/screen2.png","assets/images/projects/equally/screen3.png","assets/images/projects/equally/screen4.png","assets/images/projects/equally/screen5.png","assets/images/projects/equally/screen6.png"]),t.s)
 B.GF=A.a(s(["Group creation and seamless bill expense splitting","Smart OCR receipt scanning with Google ML Kit","Real-time balance tracking and settlement calculations","PDF expense report generation & export","Deep link join flows for easy group invites","Flutter UI with Supabase backend and Riverpod state management"]),t.s)
-B.Mf=new A.iM("Equally","A smart bill-splitting & group expense tracking app built to settle expenses easily among friends and roommates.","Split bills & expenses effortlessly with friends",B.Hx,B.Ia,"https://play.google.com/store/apps/details?id=com.devorastudios.equally&pcampaignid=web_share",B.GF)
-B.Hy=A.a(s(["Flutter","Dart","AI / LLM","REST APIs","Provider"]),t.s)
-B.HA=A.a(s(["assets/images/projects/studycoach/screen1.png","assets/images/projects/studycoach/screen2.png","assets/images/projects/studycoach/screen3.png","assets/images/projects/studycoach/screen4.png","assets/images/projects/studycoach/screen5.png"]),t.s)
+B.Mf=new A.iM("Equally","A smart bill-splitting & group expense tracking app built to settle expenses easily among friends and roommates.","Split bills & expenses effortlessly with friends",B.Hy,B.Ia,"https://play.google.com/store/apps/details?id=com.devorastudios.equally&pcampaignid=web_share",B.GF)
+B.Hz=A.a(s(["Flutter","Dart","AI / LLM","REST APIs","Provider"]),t.s)
+B.Hg=A.a(s(["assets/images/projects/studycoach/screen1.png","assets/images/projects/studycoach/screen2.png","assets/images/projects/studycoach/screen3.png","assets/images/projects/studycoach/screen4.png","assets/images/projects/studycoach/screen5.png","assets/images/projects/studycoach/screen6.png"]),t.s)
 B.HE=A.a(s(["AI-driven personalized study coaching & learning plans","Interactive topic breakdown and study quizzes","Smart flashcard and note summary generation","Progress tracking and performance analytics","Built with Flutter, AI/LLM integration, and REST APIs"]),t.s)
-B.Me=new A.iM("StudyCoach AI","An AI-powered study companion designed to optimize student learning with personalized coaching and study tools.","Your AI-powered personal study tutor & learning assistant",B.Hy,B.HA,"https://play.google.com/store/apps/details?id=com.devorastudios.studycoach&pcampaignid=web_share",B.HE)
+B.Md=new A.iM("StudyCoach AI","An AI-powered study companion designed to optimize student learning with personalized coaching and study tools.","Your AI-powered personal study tutor & learning assistant",B.Hz,B.Hg,"https://play.google.com/store/apps/details?id=com.devorastudios.studycoach&pcampaignid=web_share",B.HE)
 B.I2=A.a(s(["Flutter","Dart","Provider","REST APIs"]),t.s)
-B.Hh=A.a(s(["assets/images/projects/tealpot/screen1.jpeg","assets/images/projects/tealpot/screen2.jpeg","assets/images/projects/tealpot/screen3.jpeg","assets/images/projects/tealpot/screen4.jpeg","assets/images/projects/tealpot/screen5.jpeg","assets/images/projects/tealpot/screen6.jpeg","assets/images/projects/tealpot/screen7.jpeg"]),t.s)
+B.Hi=A.a(s(["assets/images/projects/tealpot/screen1.jpeg","assets/images/projects/tealpot/screen2.jpeg","assets/images/projects/tealpot/screen3.jpeg","assets/images/projects/tealpot/screen4.jpeg","assets/images/projects/tealpot/screen5.jpeg","assets/images/projects/tealpot/screen6.jpeg","assets/images/projects/tealpot/screen7.jpeg"]),t.s)
 B.HB=A.a(s(["Business and worker matching platform","Background-checked and vetted professional profiles","Real-time job posting and application system","Responsive UI across iOS and Android","Firebase integration for real-time data","REST API integration with clean architecture"]),t.s)
-B.Mb=new A.iM("Tealpot","A platform connecting businesses with vetted blue-collar professionals on demand, built with Flutter.","Connecting businesses with skilled blue-collar workers",B.I2,B.Hh,"https://play.google.com/store/apps/details?id=com.tealpot.tealpot&pcampaignid=web_share",B.HB)
+B.Mb=new A.iM("Tealpot","A platform connecting businesses with vetted blue-collar professionals on demand, built with Flutter.","Connecting businesses with skilled blue-collar workers",B.I2,B.Hi,"https://play.google.com/store/apps/details?id=com.tealpot.tealpot&pcampaignid=web_share",B.HB)
 B.GW=A.a(s(["Flutter","Dart","REST APIs","GetX"]),t.s)
-B.Hu=A.a(s(["assets/images/projects/servicepro/screen1.jpeg","assets/images/projects/servicepro/screen2.jpeg","assets/images/projects/servicepro/screen3.jpeg","assets/images/projects/servicepro/screen4.jpeg","assets/images/projects/servicepro/screen5.jpeg"]),t.s)
+B.Hv=A.a(s(["assets/images/projects/servicepro/screen1.jpeg","assets/images/projects/servicepro/screen2.jpeg","assets/images/projects/servicepro/screen3.jpeg","assets/images/projects/servicepro/screen4.jpeg","assets/images/projects/servicepro/screen5.jpeg"]),t.s)
 B.GY=A.a(s(["Job and work order management","Quote and invoice generation and tracking","Field worker assignment and scheduling","Workflow overview dashboard with real-time stats","Requests, approvals and status tracking","Built with Flutter, GetX and REST API integration"]),t.s)
-B.Mc=new A.iM("ServicePro360","A field service management app for managing jobs, quotes, invoices and field workers \u2014 similar to Jobber.","Complete field service management in your pocket",B.GW,B.Hu,null,B.GY)
+B.Mc=new A.iM("ServicePro360","A field service management app for managing jobs, quotes, invoices and field workers \u2014 similar to Jobber.","Complete field service management in your pocket",B.GW,B.Hv,null,B.GY)
 B.Ha=A.a(s(["Flutter","Dart","Supabase","GetX"]),t.s)
 B.GC=A.a(s(["assets/images/projects/newleaf/screen1.jpeg","assets/images/projects/newleaf/screen2.jpeg","assets/images/projects/newleaf/screen3.jpeg","assets/images/projects/newleaf/screen4.jpeg","assets/images/projects/newleaf/screen5.jpeg","assets/images/projects/newleaf/screen6.jpeg"]),t.s)
 B.H9=A.a(s(["Daily progress tracker with streak and percentage","Mood tracking to monitor emotional patterns","Journal & Reflect \u2014 daily motivational journaling","Craving tracker to identify and manage triggers","Workbook with guided exercises (Why I smoke, Why I want to quit)","Daily control center \u2014 Journal, Craving, Consumption tracking","Built with Flutter and Supabase backend"]),t.s)
-B.Md=new A.iM("New Leaf","A habit-tracking app to help users quit marijuana, with mood tracking, journaling, and daily progress tools.","Your gentle guide to a marijuana-free lifestyle",B.Ha,B.GC,null,B.H9)
-B.nB=A.a(s([B.Mf,B.Me,B.Mb,B.Mc,B.Md]),A.aw("A<iM>"))
+B.Me=new A.iM("New Leaf","A habit-tracking app to help users quit marijuana, with mood tracking, journaling, and daily progress tools.","Your gentle guide to a marijuana-free lifestyle",B.Ha,B.GC,null,B.H9)
+B.ny=A.a(s([B.Mf,B.Md,B.Mb,B.Mc,B.Me]),A.aw("A<iM>"))
+B.nz=A.a(s([0,0,26624,1023,65534,2047,65534,2047]),t.t)
+B.eF=A.a(s([B.cH,B.cm,B.fr,B.fs,B.iq]),t.QP)
+B.Ik=new A.jA("en","US")
+B.nA=A.a(s([B.Ik]),t.ss)
+B.nB=A.a(s([0,0,65490,12287,65535,34815,65534,18431]),t.t)
 B.OU=new A.ey("Flutter",B.nb)
 B.nf=new A.b_(62922,!1)
 B.OS=new A.ey("Dart",B.nf)
@@ -86974,14 +86974,14 @@ B.Fc=new A.b_(983546,!1)
 B.OV=new A.ey("GetX",B.Fc)
 B.Fg=new A.b_(984725,!1)
 B.OY=new A.ey("Riverpod",B.Fg)
-B.Hg=A.a(s([B.OX,B.OV,B.OY]),t.ZS)
-B.OO=new A.iV("\ud83e\udde0 State Management",B.Hg)
+B.Hh=A.a(s([B.OX,B.OV,B.OY]),t.ZS)
+B.OO=new A.iV("\ud83e\udde0 State Management",B.Hh)
 B.EQ=new A.b_(62269,!1)
 B.P0=new A.ey("Unit Tests",B.EQ)
 B.EP=new A.b_(62109,!1)
 B.P2=new A.ey("Golden Tests",B.EP)
-B.Hz=A.a(s([B.P0,B.P2]),t.ZS)
-B.OR=new A.iV("\ud83e\uddea Testing",B.Hz)
+B.HA=A.a(s([B.P0,B.P2]),t.ZS)
+B.OR=new A.iV("\ud83e\uddea Testing",B.HA)
 B.ER=new A.b_(62330,!1)
 B.P_=new A.ey("Play Store",B.ER)
 B.OW=new A.ey("Flutter Web",B.nj)
@@ -86990,9 +86990,9 @@ B.ON=new A.iV("\ud83d\ude80 Deployment",B.H8)
 B.jk=A.a(s([B.OP,B.OQ,B.OO,B.OR,B.ON]),A.aw("A<iV>"))
 B.Pu=new A.B8(0,"left")
 B.Pv=new A.B8(1,"right")
-B.Hp=A.a(s([B.Pu,B.Pv]),A.aw("A<B8>"))
+B.Hq=A.a(s([B.Pu,B.Pv]),A.aw("A<B8>"))
 B.ak=new A.Bi(0,"upstream")
-B.Hr=A.a(s([B.ak,B.m]),A.aw("A<Bi>"))
+B.Hs=A.a(s([B.ak,B.m]),A.aw("A<Bi>"))
 B.b2=new A.Bm(0,"rtl")
 B.au=new A.Bm(1,"ltr")
 B.jl=A.a(s([B.b2,B.au]),A.aw("A<Bm>"))
@@ -87048,14 +87048,14 @@ B.Bs=new A.r8(0,"auto")
 B.Bt=new A.r8(1,"full")
 B.Bu=new A.r8(2,"chromium")
 B.I5=A.a(s([B.Bs,B.Bt,B.Bu]),A.aw("A<r8>"))
-B.Hs=A.a(s([137,80,78,71,13,10,26,10]),t.Z)
+B.Ht=A.a(s([137,80,78,71,13,10,26,10]),t.Z)
 B.Fv=new A.mn(0,"png")
 B.FH=new A.jv(B.Fv,!1,0,"png")
-B.Fs=new A.kK(B.Hs,B.FH,0,"png")
-B.Hn=A.a(s([71,73,70,56,55,97]),t.Z)
-B.Ft=new A.kK(B.Hn,B.he,1,"gif87a")
-B.Ho=A.a(s([71,73,70,56,57,97]),t.Z)
-B.Fr=new A.kK(B.Ho,B.he,2,"gif89a")
+B.Fs=new A.kK(B.Ht,B.FH,0,"png")
+B.Ho=A.a(s([71,73,70,56,55,97]),t.Z)
+B.Ft=new A.kK(B.Ho,B.he,1,"gif87a")
+B.Hp=A.a(s([71,73,70,56,57,97]),t.Z)
+B.Fr=new A.kK(B.Hp,B.he,2,"gif89a")
 B.Gd=A.a(s([255,216,255]),t.Z)
 B.Fw=new A.mn(2,"jpeg")
 B.FF=new A.jv(B.Fw,!1,3,"jpeg")
@@ -87182,10 +87182,10 @@ B.eR=new A.f(8589935159)
 B.HM=A.a(s([B.tr,null,null,B.eR]),t.L)
 B.ts=new A.f(56)
 B.d_=new A.f(8589935160)
-B.Hv=A.a(s([B.ts,null,null,B.d_]),t.L)
+B.Hw=A.a(s([B.ts,null,null,B.d_]),t.L)
 B.tt=new A.f(57)
 B.eS=new A.f(8589935161)
-B.Hw=A.a(s([B.tt,null,null,B.eS]),t.L)
+B.Hx=A.a(s([B.tt,null,null,B.eS]),t.L)
 B.Id=A.a(s([B.eN,B.eN,B.hs,null]),t.L)
 B.ho=new A.f(4294967555)
 B.HD=A.a(s([B.ho,null,B.ho,null]),t.L)
@@ -87214,7 +87214,7 @@ B.GV=A.a(s([B.eK,null,null,B.eQ]),t.L)
 B.eL=new A.f(4294968072)
 B.Gf=A.a(s([B.eL,null,null,B.eS]),t.L)
 B.Ig=A.a(s([B.ct,B.ct,B.cV,null]),t.L)
-B.JO=new A.d7(["*",B.Hb,"+",B.Hc,"-",B.Hd,".",B.He,"/",B.Hf,"0",B.HF,"1",B.HG,"2",B.HH,"3",B.HI,"4",B.HJ,"5",B.HK,"6",B.HL,"7",B.HM,"8",B.Hv,"9",B.Hw,"Alt",B.Id,"AltGraph",B.HD,"ArrowDown",B.GQ,"ArrowLeft",B.GR,"ArrowRight",B.GS,"ArrowUp",B.GD,"Clear",B.H0,"Control",B.Ie,"Delete",B.GZ,"End",B.GT,"Enter",B.GO,"Home",B.GU,"Insert",B.H1,"Meta",B.If,"PageDown",B.GV,"PageUp",B.Gf,"Shift",B.Ig],A.aw("d7<n,H<f?>>"))
+B.JO=new A.d7(["*",B.Hb,"+",B.Hc,"-",B.Hd,".",B.He,"/",B.Hf,"0",B.HF,"1",B.HG,"2",B.HH,"3",B.HI,"4",B.HJ,"5",B.HK,"6",B.HL,"7",B.HM,"8",B.Hw,"9",B.Hx,"Alt",B.Id,"AltGraph",B.HD,"ArrowDown",B.GQ,"ArrowLeft",B.GR,"ArrowRight",B.GS,"ArrowUp",B.GD,"Clear",B.H0,"Control",B.Ie,"Delete",B.GZ,"End",B.GT,"Enter",B.GO,"Home",B.GU,"Insert",B.H1,"Meta",B.If,"PageDown",B.GV,"PageUp",B.Gf,"Shift",B.Ig],A.aw("d7<n,H<f?>>"))
 B.Gt=A.a(s([42,null,null,8589935146]),t.Z)
 B.Gu=A.a(s([43,null,null,8589935147]),t.Z)
 B.Gw=A.a(s([45,null,null,8589935149]),t.Z)
@@ -87230,24 +87230,24 @@ B.GK=A.a(s([54,null,null,8589935158]),t.Z)
 B.GL=A.a(s([55,null,null,8589935159]),t.Z)
 B.GM=A.a(s([56,null,null,8589935160]),t.Z)
 B.GN=A.a(s([57,null,null,8589935161]),t.Z)
-B.Hi=A.a(s([8589934852,8589934852,8589934853,null]),t.Z)
+B.Hj=A.a(s([8589934852,8589934852,8589934853,null]),t.Z)
 B.Gi=A.a(s([4294967555,null,4294967555,null]),t.Z)
 B.Gj=A.a(s([4294968065,null,null,8589935154]),t.Z)
 B.Gk=A.a(s([4294968066,null,null,8589935156]),t.Z)
 B.Gl=A.a(s([4294968067,null,null,8589935158]),t.Z)
 B.Gm=A.a(s([4294968068,null,null,8589935160]),t.Z)
 B.Gr=A.a(s([4294968321,null,null,8589935157]),t.Z)
-B.Hj=A.a(s([8589934848,8589934848,8589934849,null]),t.Z)
+B.Hk=A.a(s([8589934848,8589934848,8589934849,null]),t.Z)
 B.Gh=A.a(s([4294967423,null,null,8589935150]),t.Z)
 B.Gn=A.a(s([4294968069,null,null,8589935153]),t.Z)
 B.Gg=A.a(s([4294967309,null,null,8589935117]),t.Z)
 B.Go=A.a(s([4294968070,null,null,8589935159]),t.Z)
 B.Gs=A.a(s([4294968327,null,null,8589935152]),t.Z)
-B.Hk=A.a(s([8589934854,8589934854,8589934855,null]),t.Z)
+B.Hl=A.a(s([8589934854,8589934854,8589934855,null]),t.Z)
 B.Gp=A.a(s([4294968071,null,null,8589935155]),t.Z)
 B.Gq=A.a(s([4294968072,null,null,8589935161]),t.Z)
-B.Hl=A.a(s([8589934850,8589934850,8589934851,null]),t.Z)
-B.tB=new A.d7(["*",B.Gt,"+",B.Gu,"-",B.Gw,".",B.Gx,"/",B.Gy,"0",B.Gz,"1",B.GA,"2",B.GG,"3",B.GH,"4",B.GI,"5",B.GJ,"6",B.GK,"7",B.GL,"8",B.GM,"9",B.GN,"Alt",B.Hi,"AltGraph",B.Gi,"ArrowDown",B.Gj,"ArrowLeft",B.Gk,"ArrowRight",B.Gl,"ArrowUp",B.Gm,"Clear",B.Gr,"Control",B.Hj,"Delete",B.Gh,"End",B.Gn,"Enter",B.Gg,"Home",B.Go,"Insert",B.Gs,"Meta",B.Hk,"PageDown",B.Gp,"PageUp",B.Gq,"Shift",B.Hl],A.aw("d7<n,H<p?>>"))
+B.Hm=A.a(s([8589934850,8589934850,8589934851,null]),t.Z)
+B.tB=new A.d7(["*",B.Gt,"+",B.Gu,"-",B.Gw,".",B.Gx,"/",B.Gy,"0",B.Gz,"1",B.GA,"2",B.GG,"3",B.GH,"4",B.GI,"5",B.GJ,"6",B.GK,"7",B.GL,"8",B.GM,"9",B.GN,"Alt",B.Hj,"AltGraph",B.Gi,"ArrowDown",B.Gj,"ArrowLeft",B.Gk,"ArrowRight",B.Gl,"ArrowUp",B.Gm,"Clear",B.Gr,"Control",B.Hk,"Delete",B.Gh,"End",B.Gn,"Enter",B.Gg,"Home",B.Go,"Insert",B.Gs,"Meta",B.Hl,"PageDown",B.Gp,"PageUp",B.Gq,"Shift",B.Hm],A.aw("d7<n,H<p?>>"))
 B.JP=new A.d7([0,"FontWeight.w100",1,"FontWeight.w200",2,"FontWeight.w300",3,"FontWeight.w400",4,"FontWeight.w500",5,"FontWeight.w600",6,"FontWeight.w700",7,"FontWeight.w800",8,"FontWeight.w900"],A.aw("d7<p,n>"))
 B.KC={"deleteBackward:":0,"deleteWordBackward:":1,"deleteToBeginningOfLine:":2,"deleteForward:":3,"deleteWordForward:":4,"deleteToEndOfLine:":5,"moveLeft:":6,"moveRight:":7,"moveForward:":8,"moveBackward:":9,"moveUp:":10,"moveDown:":11,"moveLeftAndModifySelection:":12,"moveRightAndModifySelection:":13,"moveUpAndModifySelection:":14,"moveDownAndModifySelection:":15,"moveWordLeft:":16,"moveWordRight:":17,"moveToBeginningOfParagraph:":18,"moveToEndOfParagraph:":19,"moveWordLeftAndModifySelection:":20,"moveWordRightAndModifySelection:":21,"moveParagraphBackwardAndModifySelection:":22,"moveParagraphForwardAndModifySelection:":23,"moveToLeftEndOfLine:":24,"moveToRightEndOfLine:":25,"moveToBeginningOfDocument:":26,"moveToEndOfDocument:":27,"moveToLeftEndOfLineAndModifySelection:":28,"moveToRightEndOfLineAndModifySelection:":29,"moveToBeginningOfDocumentAndModifySelection:":30,"moveToEndOfDocumentAndModifySelection:":31,"transpose:":32,"scrollToBeginningOfDocument:":33,"scrollToEndOfDocument:":34,"scrollPageUp:":35,"scrollPageDown:":36,"pageUpAndModifySelection:":37,"pageDownAndModifySelection:":38,"cancelOperation:":39,"insertTab:":40,"insertBacktab:":41}
 B.xN=new A.l8(!1)
@@ -88142,9 +88142,9 @@ B.Ms=new A.aN(B.f4,B.f5)
 B.Mt=new A.aN(B.f6,B.f7)
 B.Mu=new A.aN(!0,!1)
 B.Mv=new A.aN(!0,!0)
-B.Mw=new A.dT(B.hd,"1.5+","Years Experience")
 B.Fb=new A.b_(983505,!1)
-B.Mx=new A.dT(B.Fb,"100%","Client Satisfaction")
+B.Mw=new A.dT(B.Fb,"100%","Client Satisfaction")
+B.Mx=new A.dT(B.hd,"2+","Years Experience")
 B.My=new A.dT(B.ng,"Mobile First","Building for iOS & Android simultaneously")
 B.Mz=new A.dT(B.jf,"5+","Projects Delivered")
 B.EO=new A.b_(62031,!1)
@@ -88954,8 +88954,8 @@ B.VW=new A.Cg(1,"radio")
 B.VX=new A.Cg(2,"toggle")
 B.XI=new A.ai9(0,"plain")
 B.Cw=new A.x(0.01568627450980392,0,0,0,B.e)
-B.Hm=A.a(s([B.Cw,B.H]),t.O)
-B.VY=new A.j6(B.Hm)
+B.Hn=A.a(s([B.Cw,B.H]),t.O)
+B.VY=new A.j6(B.Hn)
 B.VZ=new A.j6(null)
 B.kM=new A.qr(0,"backButton")
 B.kN=new A.qr(1,"nextButton")

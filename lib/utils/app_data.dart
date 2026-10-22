@@ -4,7 +4,7 @@ import '../models/skill.dart';
 import '../models/skill_group.dart';
 
 class AppData {
-  static const String githubProfile = 'https://github.com/Muhammad-Hasnain67';
+  static const String githubProfile = 'https://github.com/HasnainChd';
 
   static const List<SkillGroup> skillGroups = [
     SkillGroup(
